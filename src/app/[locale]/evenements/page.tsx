@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { FadeIn } from '@/components/home/AnimatedSections'
 
 export default function EvenementsPage() {
   const params = useParams()
@@ -59,23 +60,28 @@ export default function EvenementsPage() {
         {/* Hero */}
         <section className="bg-forest py-16" aria-labelledby="events-heading">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="events-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
-              {isFr ? 'Pop-ups & Événements' : 'Pop-ups & Events'}
-            </h1>
-            <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-              {isFr
-                ? 'Découvrez nos prochains pop-ups et participez en tant que vendeur·se ou visiteur·se.'
-                : 'Discover our upcoming pop-ups and participate as a vendor or visitor.'}
-            </p>
+            <FadeIn>
+              <h1 id="events-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
+                {isFr ? 'Pop-ups & Événements' : 'Pop-ups & Events'}
+              </h1>
+              <p className="text-cream/70 text-lg max-w-2xl mx-auto">
+                {isFr
+                  ? 'Découvrez nos prochains pop-ups et participez en tant que vendeur·se ou visiteur·se.'
+                  : 'Discover our upcoming pop-ups and participate as a vendor or visitor.'}
+              </p>
+            </FadeIn>
           </div>
         </section>
 
         {/* Upcoming events placeholder */}
         <section className="py-16 bg-cream" aria-labelledby="upcoming-heading">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 id="upcoming-heading" className="font-serif text-3xl text-forest mb-6 text-center">
-              {isFr ? 'Événements à venir' : 'Upcoming events'}
-            </h2>
+            <FadeIn>
+              <h2 id="upcoming-heading" className="font-serif text-3xl text-forest mb-6 text-center">
+                {isFr ? 'Événements à venir' : 'Upcoming events'}
+              </h2>
+            </FadeIn>
+            <FadeIn delay={0.1}>
             <div className="bg-white rounded-2xl border-2 border-dashed border-sage/40 p-12 text-center">
               <div className="text-5xl mb-4">🌸</div>
               <p className="text-lg font-medium text-forest mb-2">
@@ -95,6 +101,7 @@ export default function EvenementsPage() {
                 {isFr ? "S'inscrire à l'infolettre" : 'Subscribe to newsletter'}
               </Link>
             </div>
+            </FadeIn>
           </div>
         </section>
 
@@ -102,6 +109,7 @@ export default function EvenementsPage() {
         <section className="py-16 bg-white" aria-labelledby="vendor-heading">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
+              <FadeIn>
               <h2 id="vendor-heading" className="font-serif text-3xl text-forest mb-4">
                 {isFr ? 'Devenir vendeur·se' : 'Become a vendor'}
               </h2>
@@ -110,6 +118,7 @@ export default function EvenementsPage() {
                   ? 'Vous avez une marque, un produit ou un service en lien avec notre univers ? Proposez votre candidature pour participer à nos pop-ups.'
                   : 'Do you have a brand, product or service related to our universe? Submit your application to participate in our pop-ups.'}
               </p>
+              </FadeIn>
             </div>
 
             {status === 'success' ? (

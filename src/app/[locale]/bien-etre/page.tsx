@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { Clock, Users } from 'lucide-react'
+import { FadeIn, StaggerContainer, StaggerItem, HoverLift } from '@/components/ui/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -99,14 +100,16 @@ export default async function BienEtrePage({
       <main id="main-content">
         <div className="bg-forest py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl font-serif text-cream mb-4">
-              {isFr ? 'Bien-être' : 'Wellness'}
-            </h1>
-            <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-              {isFr
-                ? 'Yoga, pilates, méditation et ateliers bien-être dans un espace dédié à votre santé.'
-                : 'Yoga, pilates, meditation and wellness workshops in a space dedicated to your health.'}
-            </p>
+            <FadeIn>
+              <h1 className="text-4xl font-serif text-cream mb-4">
+                {isFr ? 'Bien-être' : 'Wellness'}
+              </h1>
+              <p className="text-cream/70 text-lg max-w-2xl mx-auto">
+                {isFr
+                  ? 'Yoga, pilates, méditation et ateliers bien-être dans un espace dédié à votre santé.'
+                  : 'Yoga, pilates, meditation and wellness workshops in a space dedicated to your health.'}
+              </p>
+            </FadeIn>
           </div>
         </div>
 
@@ -119,9 +122,10 @@ export default async function BienEtrePage({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {wellnessServices.map((s) => (
-              <article key={s.id} className="card flex flex-col overflow-hidden">
+              <StaggerItem key={s.id}>
+              <HoverLift as="article" className="card flex flex-col overflow-hidden h-full">
                 <ImagePlaceholder
                   label={isFr ? s.title_fr : s.title_en}
                   aspectRatio="aspect-video"
@@ -157,9 +161,10 @@ export default async function BienEtrePage({
                     </Link>
                   </div>
                 </div>
-              </article>
+              </HoverLift>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </main>
       <Footer />

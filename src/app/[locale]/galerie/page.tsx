@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -50,14 +51,16 @@ export default async function GaleriePage({
         {/* Hero */}
         <section className="bg-forest py-16" aria-labelledby="gallery-heading">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="gallery-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
-              {isFr ? 'Galerie' : 'Gallery'}
-            </h1>
-            <p className="text-cream/70 text-lg max-w-xl mx-auto">
-              {isFr
-                ? 'Découvrez notre univers en images.'
-                : 'Discover our world in pictures.'}
-            </p>
+            <FadeIn>
+              <h1 id="gallery-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
+                {isFr ? 'Galerie' : 'Gallery'}
+              </h1>
+              <p className="text-cream/70 text-lg max-w-xl mx-auto">
+                {isFr
+                  ? 'Découvrez notre univers en images.'
+                  : 'Discover our world in pictures.'}
+              </p>
+            </FadeIn>
           </div>
         </section>
 
@@ -75,21 +78,23 @@ export default async function GaleriePage({
         {/* Gallery grid */}
         <section className="py-16 bg-cream">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {galleryItems.map((item) => (
-                <div key={item.label_fr} className="group relative">
-                  <ImagePlaceholder
-                    label={isFr ? item.label_fr : item.label_en}
-                    aspectRatio="aspect-square"
-                  />
-                  <div className="mt-2 text-center">
-                    <p className="text-xs text-brown/60">
-                      {isFr ? item.label_fr : item.label_en}
-                    </p>
+                <StaggerItem key={item.label_fr}>
+                  <div className="group relative img-hover-zoom">
+                    <ImagePlaceholder
+                      label={isFr ? item.label_fr : item.label_en}
+                      aspectRatio="aspect-square"
+                    />
+                    <div className="mt-2 text-center">
+                      <p className="text-xs text-brown/60">
+                        {isFr ? item.label_fr : item.label_en}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
             <p className="text-center text-sm text-brown/50 italic mt-10">
               {isFr
                 ? '[Les photos seront ajoutées prochainement par l\'administrateur]'

@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -44,14 +45,16 @@ export default async function AProposPage({
         {/* Hero */}
         <section className="bg-forest py-20" aria-labelledby="about-heading">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="about-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
-              {isFr ? 'À propos' : 'About us'}
-            </h1>
-            <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-              {isFr
-                ? 'Un salon de thé, un espace bien-être, un lieu de communauté au cœur de Montréal.'
-                : 'A tea salon, a wellness space, a community hub in the heart of Montreal.'}
-            </p>
+            <FadeIn>
+              <h1 id="about-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
+                {isFr ? 'À propos' : 'About us'}
+              </h1>
+              <p className="text-cream/70 text-lg max-w-2xl mx-auto">
+                {isFr
+                  ? 'Un salon de thé, un espace bien-être, un lieu de communauté au cœur de Montréal.'
+                  : 'A tea salon, a wellness space, a community hub in the heart of Montreal.'}
+              </p>
+            </FadeIn>
           </div>
         </section>
 
@@ -59,7 +62,7 @@ export default async function AProposPage({
         <section className="py-16 bg-cream" aria-labelledby="space-heading">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
+              <FadeIn>
                 <h2 id="space-heading" className="font-serif text-3xl text-forest mb-6">
                   {isFr ? 'Notre espace' : 'Our space'}
                 </h2>
@@ -76,13 +79,13 @@ export default async function AProposPage({
                 <p className="text-sm text-brown/60 italic">
                   1951 Rue Saint-Zotique Est, Montréal, QC
                 </p>
-              </div>
-              <div>
+              </FadeIn>
+              <FadeIn delay={0.15}>
                 <ImagePlaceholder
                   label={isFr ? 'Intérieur du salon' : 'Salon interior'}
                   aspectRatio="aspect-[4/3]"
                 />
-              </div>
+              </FadeIn>
             </div>
           </div>
         </section>
@@ -90,6 +93,7 @@ export default async function AProposPage({
         {/* Notre mission */}
         <section className="py-16 bg-white" aria-labelledby="mission-heading">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <FadeIn>
             <h2 id="mission-heading" className="font-serif text-3xl text-forest mb-6">
               {isFr ? 'Notre mission' : 'Our mission'}
             </h2>
@@ -98,6 +102,7 @@ export default async function AProposPage({
                 ? '"Notre mission est de créer un espace de bien-être, de créativité et de communauté accessible à tous."'
                 : '"Our mission is to create a space of wellness, creativity and community accessible to all."'}
             </p>
+            </FadeIn>
           </div>
         </section>
 
@@ -107,7 +112,7 @@ export default async function AProposPage({
             <h2 id="activities-heading" className="font-serif text-3xl text-forest mb-8 text-center">
               {isFr ? 'Ce que vous pouvez vivre ici' : 'What you can experience here'}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {[
                 { fr: '🫖 Déguster des thés & infusions du monde', en: '🫖 Tasting teas & infusions from around the world' },
                 { fr: '🧘 Yoga, pilates & méditation', en: '🧘 Yoga, pilates & meditation' },
@@ -118,14 +123,13 @@ export default async function AProposPage({
                 { fr: '🥗 Savourer des repas végétaliens faits maison', en: '🥗 Enjoying homemade vegan meals' },
                 { fr: '📿 Participer à des ateliers bijoux & artisanat', en: '📿 Joining jewellery & craft workshops' },
               ].map((item) => (
-                <div
-                  key={item.fr}
-                  className="p-4 rounded-xl bg-white border border-sage/20 text-sm text-charcoal font-medium"
-                >
-                  {isFr ? item.fr : item.en}
-                </div>
+                <StaggerItem key={item.fr}>
+                  <div className="p-4 rounded-xl bg-white border border-sage/20 text-sm text-charcoal font-medium">
+                    {isFr ? item.fr : item.en}
+                  </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
 
@@ -154,10 +158,10 @@ export default async function AProposPage({
             <h2 id="values-heading" className="font-serif text-3xl text-forest mb-10 text-center">
               {isFr ? 'Nos valeurs' : 'Our values'}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {values.map((v) => (
+                <StaggerItem key={v.title_fr}>
                 <div
-                  key={v.title_fr}
                   className="bg-white rounded-2xl p-6 shadow-sm border border-sage/10 text-center hover:border-sage/30 transition-colors"
                 >
                   <span className="text-4xl mb-3 block" aria-hidden="true">{v.emoji}</span>
@@ -168,8 +172,9 @@ export default async function AProposPage({
                     {isFr ? v.desc_fr : v.desc_en}
                   </p>
                 </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
 

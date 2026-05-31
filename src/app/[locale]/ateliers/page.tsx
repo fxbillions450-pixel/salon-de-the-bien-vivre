@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { Clock, Users } from 'lucide-react'
+import { FadeIn, StaggerContainer, StaggerItem, HoverLift } from '@/components/ui/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -105,14 +106,16 @@ export default async function AteliersPage({
       <main id="main-content">
         <div className="bg-forest py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl font-serif text-cream mb-4">
-              {isFr ? 'Ateliers créatifs' : 'Creative workshops'}
-            </h1>
-            <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-              {isFr
-                ? 'Exprimez votre créativité dans notre espace chaleureux, thé à la main.'
-                : 'Express your creativity in our warm space, tea in hand.'}
-            </p>
+            <FadeIn>
+              <h1 className="text-4xl font-serif text-cream mb-4">
+                {isFr ? 'Ateliers créatifs' : 'Creative workshops'}
+              </h1>
+              <p className="text-cream/70 text-lg max-w-2xl mx-auto">
+                {isFr
+                  ? 'Exprimez votre créativité dans notre espace chaleureux, thé à la main.'
+                  : 'Express your creativity in our warm space, tea in hand.'}
+              </p>
+            </FadeIn>
           </div>
         </div>
 
@@ -125,9 +128,10 @@ export default async function AteliersPage({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {workshops.map((w) => (
-              <article key={w.id} className="card flex flex-col overflow-hidden">
+              <StaggerItem key={w.id}>
+              <HoverLift as="article" className="card flex flex-col overflow-hidden h-full">
                 <ImagePlaceholder
                   label={isFr ? w.title_fr : w.title_en}
                   aspectRatio="aspect-video"
@@ -163,9 +167,10 @@ export default async function AteliersPage({
                     </Link>
                   </div>
                 </div>
-              </article>
+              </HoverLift>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </main>
       <Footer />

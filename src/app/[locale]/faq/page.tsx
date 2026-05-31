@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ChevronDown } from 'lucide-react'
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/home/AnimatedSections'
 
 interface FaqItem {
   question: string
@@ -223,28 +224,32 @@ export default function FaqPage() {
         {/* Hero */}
         <section className="bg-forest py-16" aria-labelledby="faq-heading">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="faq-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
-              {isFr ? 'Foire aux questions' : 'FAQ'}
-            </h1>
-            <p className="text-cream/70 text-lg max-w-xl mx-auto">
-              {isFr
-                ? 'Les réponses à vos questions les plus fréquentes.'
-                : 'Answers to your most frequently asked questions.'}
-            </p>
+            <FadeIn>
+              <h1 id="faq-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
+                {isFr ? 'Foire aux questions' : 'FAQ'}
+              </h1>
+              <p className="text-cream/70 text-lg max-w-xl mx-auto">
+                {isFr
+                  ? 'Les réponses à vos questions les plus fréquentes.'
+                  : 'Answers to your most frequently asked questions.'}
+              </p>
+            </FadeIn>
           </div>
         </section>
 
         <section className="py-16 bg-cream">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             {faqData.map((category) => (
-              <div key={category.title} className="mb-10">
+              <FadeIn key={category.title} className="mb-10">
                 <h2 className="font-serif text-2xl text-forest mb-5">{category.title}</h2>
-                <div className="space-y-3">
+                <StaggerContainer className="space-y-3">
                   {category.items.map((item) => (
-                    <AccordionItem key={item.question} question={item.question} answer={item.answer} />
+                    <StaggerItem key={item.question}>
+                      <AccordionItem question={item.question} answer={item.answer} />
+                    </StaggerItem>
                   ))}
-                </div>
-              </div>
+                </StaggerContainer>
+              </FadeIn>
             ))}
 
             <div className="mt-10 bg-white rounded-2xl p-6 border border-sage/20 text-center">

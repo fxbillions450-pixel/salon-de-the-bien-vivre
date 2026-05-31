@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
+import { FadeIn } from '@/components/home/AnimatedSections'
 
 const eventTypes_fr = [
   'Anniversaire',
@@ -81,7 +82,7 @@ export default function LocationPriveePage() {
         <section className="bg-forest py-20" aria-labelledby="private-heading">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
+              <FadeIn>
                 <h1 id="private-heading" className="font-serif text-4xl md:text-5xl text-cream mb-6">
                   {isFr ? 'Réservez votre espace privé' : 'Book your private space'}
                 </h1>
@@ -98,13 +99,13 @@ export default function LocationPriveePage() {
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div>
+              </FadeIn>
+              <FadeIn delay={0.15}>
                 <ImagePlaceholder
                   label={isFr ? 'Espace privé Bien Vivre' : 'Bien Vivre private space'}
                   aspectRatio="aspect-[4/3]"
                 />
-              </div>
+              </FadeIn>
             </div>
           </div>
         </section>
@@ -112,6 +113,7 @@ export default function LocationPriveePage() {
         {/* Form */}
         <section className="py-16 bg-cream" aria-labelledby="inquiry-form-heading">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FadeIn>
             <h2 id="inquiry-form-heading" className="font-serif text-3xl text-forest mb-2 text-center">
               {isFr ? 'Demande de réservation' : 'Booking inquiry'}
             </h2>
@@ -120,6 +122,7 @@ export default function LocationPriveePage() {
                 ? 'Remplissez ce formulaire et nous vous contacterons dans les 48 heures.'
                 : 'Fill out this form and we will contact you within 48 hours.'}
             </p>
+            </FadeIn>
 
             {status === 'success' ? (
               <div className="bg-sage/20 rounded-2xl p-10 text-center">

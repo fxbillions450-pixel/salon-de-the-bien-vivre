@@ -71,3 +71,33 @@ h1, h2, h3, h4, h5, h6 {
     animation: none;
   }
 }
+
+/* Soft image hover zoom for gallery-type containers */
+.img-hover-zoom {
+  overflow: hidden;
+}
+.img-hover-zoom img,
+.img-hover-zoom > div {
+  transition: transform 0.4s ease;
+}
+.img-hover-zoom:hover img,
+.img-hover-zoom:hover > div {
+  transform: scale(1.04);
+}
+
+/* Card lift utility */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img-hover-zoom img,
+  .img-hover-zoom > div,
+  .card-lift:hover {
+    transform: none;
+  }
+}
