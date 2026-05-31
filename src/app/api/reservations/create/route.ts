@@ -4,6 +4,7 @@ import { rateLimit } from '@/lib/ratelimit'
 import { verifyTurnstile } from '@/lib/turnstile'
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
 import { createSquarePayment } from '@/lib/square'
+import { EXPERIENCE_BOOKING_SELECT } from '@/lib/db/selects'
 import { randomUUID } from 'crypto'
 
 export async function POST(req: NextRequest) {
@@ -44,7 +45,7 @@ export async function POST(req: NextRequest) {
     // Fetch experience
     const { data: experience, error: expError } = await supabase
       .from('experiences')
-      .select('id, title_fr, status, capacity, spots_reserved, spots_confirmed, price_cents, currency, start_time')
+      .select(EXPERIENCE_BOOKING_SELECT)
       .eq('id', data.experienceId)
       .single()
 

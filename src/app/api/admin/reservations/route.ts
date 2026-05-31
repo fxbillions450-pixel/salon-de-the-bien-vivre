@@ -4,6 +4,7 @@ export const runtime = 'nodejs'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase/server'
+import { EXPERIENCE_RESERVATION_SELECT } from '@/lib/db/selects'
 
 async function checkAdminAuth() {
   const supabase = await createServerSupabaseClient()
@@ -40,7 +41,7 @@ export async function GET(req: NextRequest) {
 
     let query = adminClient
       .from('reservations')
-      .select('*, experiences(title_fr, title_en, start_time)', { count: 'exact' })
+      .select(`*, experiences(${EXPERIENCE_RESERVATION_SELECT})`, { count: 'exact' })
       .order('created_at', { ascending: false })
       .range(offset, offset + limit - 1)
 

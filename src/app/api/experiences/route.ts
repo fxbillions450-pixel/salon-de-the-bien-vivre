@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server'
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
+import { EXPERIENCE_PUBLIC_SELECT } from '@/lib/db/selects'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function GET() {
   try {
@@ -8,14 +12,7 @@ export async function GET() {
 
     const { data, error } = await supabase
       .from('experiences')
-      .select(`
-        id, title_fr, title_en, description_fr, description_en,
-        category, start_time, end_time, duration_minutes,
-        price_cents, currency, capacity, spots_reserved, spots_confirmed,
-        instructor_name, image_url, status,
-        what_to_bring_fr, what_to_bring_en,
-        cancellation_policy_fr, cancellation_policy_en
-      `)
+      .select(EXPERIENCE_PUBLIC_SELECT)
       .eq('status', 'published')
       .gte('start_time', now)
       .order('start_time', { ascending: true })

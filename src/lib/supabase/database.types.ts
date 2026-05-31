@@ -186,6 +186,10 @@ export interface Database {
           requirements_en: string | null
           included_fr: string | null
           included_en: string | null
+          what_to_bring_fr: string | null
+          what_to_bring_en: string | null
+          cancellation_policy_fr: string | null
+          cancellation_policy_en: string | null
           status: 'draft' | 'published' | 'cancelled' | 'completed'
           is_featured: boolean
           created_at: string
@@ -219,6 +223,10 @@ export interface Database {
           requirements_en?: string | null
           included_fr?: string | null
           included_en?: string | null
+          what_to_bring_fr?: string | null
+          what_to_bring_en?: string | null
+          cancellation_policy_fr?: string | null
+          cancellation_policy_en?: string | null
           status?: 'draft' | 'published' | 'cancelled' | 'completed'
           is_featured?: boolean
           created_at?: string
@@ -251,6 +259,10 @@ export interface Database {
           requirements_en?: string | null
           included_fr?: string | null
           included_en?: string | null
+          what_to_bring_fr?: string | null
+          what_to_bring_en?: string | null
+          cancellation_policy_fr?: string | null
+          cancellation_policy_en?: string | null
           status?: 'draft' | 'published' | 'cancelled' | 'completed'
           is_featured?: boolean
           updated_at?: string

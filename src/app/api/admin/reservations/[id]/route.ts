@@ -3,6 +3,7 @@ export const revalidate = 0
 export const runtime = 'nodejs'
 
 import { NextRequest, NextResponse } from 'next/server'
+import { EXPERIENCE_RESERVATION_SELECT } from '@/lib/db/selects'
 import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase/server'
 import { z } from 'zod'
 
@@ -39,7 +40,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
     const { data, error } = await auth.adminClient
       .from('reservations')
-      .select('*, experiences(title_fr, title_en, start_time, duration_minutes)')
+      .select(`*, experiences(${EXPERIENCE_RESERVATION_SELECT})`)
       .eq('id', id)
       .single()
 

@@ -4,6 +4,7 @@ export const revalidate = 0
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import type { Database } from '@/lib/supabase/database.types'
+import { EXPERIENCE_RESERVATION_SELECT } from '@/lib/db/selects'
 
 type Reservation = Database['public']['Tables']['reservations']['Row'] & {
   experiences: { title_fr: string; title_en: string; start_time: string } | null
@@ -20,7 +21,7 @@ export default async function AdminReservationsPage({
   const adminClient = await createAdminSupabaseClient()
   const { data } = await adminClient
     .from('reservations')
-    .select('*, experiences(title_fr, title_en, start_time)')
+    .select(`*, experiences(${EXPERIENCE_RESERVATION_SELECT})`)
     .order('created_at', { ascending: false })
     .limit(50)
   const reservations = (data ?? []) as Reservation[]
