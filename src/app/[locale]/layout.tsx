@@ -43,6 +43,11 @@ export const metadata: Metadata = {
     alternateLocale: 'en_CA',
     siteName: 'Salon de Thé Bien Vivre',
   },
+  icons: {
+    icon: '/icon',
+    shortcut: '/icon',
+    apple: '/icon',
+  },
 }
 
 export default async function LocaleLayout({
