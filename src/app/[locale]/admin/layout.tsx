@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 import { redirect } from 'next/navigation'
 import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase/server'
 import type { Database } from '@/lib/supabase/database.types'
