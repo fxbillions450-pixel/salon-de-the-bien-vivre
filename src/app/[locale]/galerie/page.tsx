@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSections'
+import { StaggerContainer, StaggerItem, ImmersivePageHeader } from '@/components/home/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -48,21 +48,11 @@ export default async function GaleriePage({
     <>
       <Header />
       <main id="main-content">
-        {/* Hero */}
-        <section className="bg-forest py-16" aria-labelledby="gallery-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <FadeIn>
-              <h1 id="gallery-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
-                {isFr ? 'Galerie' : 'Gallery'}
-              </h1>
-              <p className="text-cream/70 text-lg max-w-xl mx-auto">
-                {isFr
-                  ? 'Découvrez notre univers en images.'
-                  : 'Discover our world in pictures.'}
-              </p>
-            </FadeIn>
-          </div>
-        </section>
+        <ImmersivePageHeader
+          label={isFr ? 'Galerie' : 'Gallery'}
+          heading={isFr ? 'Galerie' : 'Gallery'}
+          subheading={isFr ? 'Découvrez notre univers en images.' : 'Discover our world in pictures.'}
+        />
 
         {/* Admin note */}
         <div className="bg-terracotta/10 border-b border-terracotta/20">
@@ -76,7 +66,7 @@ export default async function GaleriePage({
         </div>
 
         {/* Gallery grid */}
-        <section className="py-16 bg-cream">
+        <section className="py-16 section-warm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {galleryItems.map((item) => (

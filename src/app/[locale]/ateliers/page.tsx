@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Clock, Users } from 'lucide-react'
-import { FadeIn, StaggerContainer, StaggerItem, HoverLift } from '@/components/ui/AnimatedSections'
+import { FadeIn, StaggerContainer, StaggerItem, TiltCard, ImmersivePageHeader } from '@/components/home/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -110,20 +110,13 @@ export default async function AteliersPage({
     <>
       <Header />
       <main id="main-content">
-        <div className="bg-forest py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <FadeIn>
-              <h1 className="text-4xl font-serif text-cream mb-4">
-                {isFr ? 'Ateliers créatifs' : 'Creative workshops'}
-              </h1>
-              <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-                {isFr
-                  ? 'Exprimez votre créativité dans notre espace chaleureux, thé à la main.'
-                  : 'Express your creativity in our warm space, tea in hand.'}
-              </p>
-            </FadeIn>
-          </div>
-        </div>
+        <ImmersivePageHeader
+          label={isFr ? 'Ateliers' : 'Workshops'}
+          heading={isFr ? 'Ateliers créatifs' : 'Creative workshops'}
+          subheading={isFr
+            ? 'Exprimez votre créativité dans notre espace chaleureux, thé à la main.'
+            : 'Express your creativity in our warm space, tea in hand.'}
+        />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="bg-blush/20 border border-terracotta/20 rounded-2xl p-4 mb-10 text-center">
@@ -137,7 +130,7 @@ export default async function AteliersPage({
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {workshops.map((w) => (
               <StaggerItem key={w.id}>
-              <HoverLift as="article" className="card flex flex-col overflow-hidden h-full">
+              <TiltCard className="card-warm flex flex-col overflow-hidden h-full">
                 <div className="relative aspect-video overflow-hidden rounded-t-2xl">
                   <Image
                     src={w.image}
@@ -177,7 +170,7 @@ export default async function AteliersPage({
                     </Link>
                   </div>
                 </div>
-              </HoverLift>
+              </TiltCard>
               </StaggerItem>
             ))}
           </StaggerContainer>

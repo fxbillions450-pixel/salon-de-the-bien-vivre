@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSections'
+import { FadeIn, StaggerContainer, StaggerItem, TiltCard, ImmersivePageHeader, AnimatedDivider } from '@/components/home/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -42,21 +42,13 @@ export default async function AProposPage({
     <>
       <Header />
       <main id="main-content">
-        {/* Hero */}
-        <section className="bg-forest py-20" aria-labelledby="about-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <FadeIn>
-              <h1 id="about-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
-                {isFr ? 'À propos' : 'About us'}
-              </h1>
-              <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-                {isFr
-                  ? 'Un salon de thé, un espace bien-être, un lieu de communauté au cœur de Montréal.'
-                  : 'A tea salon, a wellness space, a community hub in the heart of Montreal.'}
-              </p>
-            </FadeIn>
-          </div>
-        </section>
+        <ImmersivePageHeader
+          label={isFr ? 'À propos' : 'About'}
+          heading={isFr ? 'À propos de nous' : 'About us'}
+          subheading={isFr
+            ? 'Un salon de thé, un espace bien-être, un lieu de communauté au cœur de Montréal.'
+            : 'A tea salon, a wellness space, a community hub in the heart of Montreal.'}
+        />
 
         {/* Notre espace */}
         <section className="py-16 bg-cream" aria-labelledby="space-heading">
@@ -160,9 +152,7 @@ export default async function AProposPage({
             <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {values.map((v) => (
                 <StaggerItem key={v.title_fr}>
-                <div
-                  className="bg-white rounded-2xl p-6 shadow-sm border border-sage/10 text-center hover:border-sage/30 transition-colors"
-                >
+                <TiltCard className="card-warm p-6 text-center">
                   <span className="text-4xl mb-3 block" aria-hidden="true">{v.emoji}</span>
                   <h3 className="font-serif text-xl text-forest mb-2">
                     {isFr ? v.title_fr : v.title_en}
@@ -170,7 +160,7 @@ export default async function AProposPage({
                   <p className="text-sm text-brown/70">
                     {isFr ? v.desc_fr : v.desc_en}
                   </p>
-                </div>
+                </TiltCard>
                 </StaggerItem>
               ))}
             </StaggerContainer>

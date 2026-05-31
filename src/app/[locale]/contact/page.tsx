@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { MapPin, Clock, Phone, Mail } from 'lucide-react'
-import { FadeIn } from '@/components/home/AnimatedSections'
+import { FadeIn, ImmersivePageHeader, ScrollReveal } from '@/components/home/AnimatedSections'
 
 export default function ContactPage() {
   const params = useParams()
@@ -74,19 +74,13 @@ export default function ContactPage() {
     <>
       <Header />
       <main id="main-content">
-        {/* Hero */}
-        <section className="bg-forest py-16" aria-labelledby="contact-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="contact-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
-              {isFr ? 'Nous contacter' : 'Contact us'}
-            </h1>
-            <p className="text-cream/70 text-lg max-w-xl mx-auto">
-              {isFr
-                ? 'Une question, une réservation, un projet ? Nous sommes là.'
-                : 'A question, a reservation, a project? We are here.'}
-            </p>
-          </div>
-        </section>
+        <ImmersivePageHeader
+          label={isFr ? 'Contact' : 'Contact'}
+          heading={isFr ? 'Nous contacter' : 'Contact us'}
+          subheading={isFr
+            ? 'Une question, une réservation, un projet ? Nous sommes là.'
+            : 'A question, a reservation, a project? We are here.'}
+        />
 
         <section className="py-16 bg-cream">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -37,7 +37,7 @@ export function Header() {
   const otherLocalePath = pathname.replace(`/${locale}`, `/${otherLocale}`)
 
   return (
-    <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-sage/20">
+    <header className="sticky top-0 z-50 bg-cream/95 backdrop-blur-md border-b border-oat">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -68,8 +68,8 @@ export function Header() {
                 className={cn(
                   'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
                   isActive(href)
-                    ? 'bg-forest/10 text-forest'
-                    : 'text-charcoal/70 hover:text-forest hover:bg-forest/5'
+                    ? 'bg-terracotta/10 text-terracotta'
+                    : 'text-espresso/70 hover:text-terracotta hover:bg-terracotta/5'
                 )}
               >
                 {t(key)}
@@ -81,7 +81,7 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <Link
               href={otherLocalePath}
-              className="text-sm text-brown/70 hover:text-forest transition-colors font-medium uppercase tracking-wide"
+              className="text-sm text-brown/70 hover:text-terracotta transition-colors font-medium uppercase tracking-wide"
               aria-label={`Passer en ${otherLocale === 'fr' ? 'français' : 'English'}`}
             >
               {otherLocale.toUpperCase()}
@@ -97,7 +97,7 @@ export function Header() {
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="lg:hidden p-2 rounded-lg text-charcoal hover:bg-forest/10 transition-colors"
+            className="lg:hidden p-2 rounded-lg text-espresso hover:bg-terracotta/10 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
@@ -113,7 +113,7 @@ export function Header() {
         {mobileOpen && (
           <motion.div
             id="mobile-menu"
-            className="lg:hidden bg-cream border-t border-sage/20 overflow-hidden"
+            className="lg:hidden bg-cream border-t border-oat overflow-hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -130,18 +130,18 @@ export function Header() {
                   className={cn(
                     'px-4 py-3 rounded-lg text-sm font-medium transition-colors',
                     isActive(href)
-                      ? 'bg-forest/10 text-forest'
-                      : 'text-charcoal/70 hover:text-forest hover:bg-forest/5'
+                      ? 'bg-terracotta/10 text-terracotta'
+                      : 'text-espresso/70 hover:text-terracotta hover:bg-terracotta/5'
                   )}
                   onClick={() => setMobileOpen(false)}
                 >
                   {t(key)}
                 </Link>
               ))}
-              <div className="flex items-center gap-3 pt-3 border-t border-sage/20 mt-2">
+              <div className="flex items-center gap-3 pt-3 border-t border-oat mt-2">
                 <Link
                   href={otherLocalePath}
-                  className="text-sm text-brown/70 hover:text-forest transition-colors font-medium uppercase tracking-wide"
+                  className="text-sm text-brown/70 hover:text-terracotta transition-colors font-medium uppercase tracking-wide"
                   onClick={() => setMobileOpen(false)}
                 >
                   {otherLocale.toUpperCase()}

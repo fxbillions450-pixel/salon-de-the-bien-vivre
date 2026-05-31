@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { StaggerContainer, StaggerItem, FadeIn } from '@/components/home/AnimatedSections'
+import { StaggerContainer, StaggerItem, FadeIn, ImmersivePageHeader } from '@/components/home/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -111,10 +111,10 @@ const menuCategories: MenuCategory[] = [
 ]
 
 const tagColors: Record<string, string> = {
-  vegan: 'bg-forest/10 text-forest',
-  'sans-caféine': 'bg-sage/20 text-forest',
+  vegan: 'bg-matcha/20 text-forest',
+  'sans-caféine': 'bg-sage/10 text-sage',
   local: 'bg-terracotta/10 text-terracotta',
-  cru: 'bg-blush/30 text-brown',
+  cru: 'bg-honey/20 text-cocoa',
   saisonnier: 'bg-blush/40 text-brown',
 }
 
@@ -129,21 +129,13 @@ export default async function MenuPage({
     <>
       <Header />
       <main id="main-content">
-        <section className="bg-cream py-16" aria-labelledby="menu-page-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <FadeIn>
-              <h1 id="menu-page-heading" className="font-serif text-4xl md:text-5xl text-forest mb-4">
-                Notre menu
-              </h1>
-              <p className="text-brown/80 text-lg max-w-2xl mx-auto">
-                Un menu végétalien, local et fait avec soin. Aucune commande en ligne —
-                menu consultable en salle et ici.
-              </p>
-            </FadeIn>
-          </div>
-        </section>
+        <ImmersivePageHeader
+          label="Notre Menu"
+          heading="Notre menu"
+          subheading="Un menu végétalien, local et fait avec soin. Aucune commande en ligne — menu consultable en salle et ici."
+        />
 
-        <section className="py-16 bg-white">
+        <section className="py-16 section-warm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="space-y-16">
               {menuCategories.map((category) => (
@@ -158,7 +150,7 @@ export default async function MenuPage({
                     {category.items.map((item) => (
                       <StaggerItem key={item.name}>
                       <article
-                        className="p-5 rounded-2xl bg-cream/60 border border-sage/20 hover:border-sage/40 transition-colors ring-1 ring-black/5"
+                        className="card-warm p-5 hover:border-oat/80 transition-colors"
                       >
                         <div className="flex justify-between items-start mb-2">
                           <h3 className="font-medium text-charcoal">{item.name}</h3>

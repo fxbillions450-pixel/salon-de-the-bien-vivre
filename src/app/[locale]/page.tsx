@@ -13,6 +13,9 @@ import {
   StaggerItem,
   HoverLift,
   FadeIn,
+  TiltCard,
+  SectionIntro,
+  AnimatedDivider,
 } from '@/components/home/AnimatedSections'
 
 export async function generateMetadata({
@@ -75,7 +78,7 @@ function QuickInfoSection() {
     },
   ]
   return (
-    <section className="bg-white py-12" aria-label="Informations pratiques">
+    <section className="section-warm py-12" aria-label="Informations pratiques">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map(({ icon, label, value }) => (
@@ -151,7 +154,7 @@ function ExperiencesSection({ locale }: { locale: string }) {
   ]
 
   return (
-    <section className="py-20 bg-cream" aria-labelledby="experiences-heading">
+    <section className="py-20 section-warm" aria-labelledby="experiences-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <FadeInSectionHeading id="experiences-heading" className="section-title">
@@ -164,7 +167,7 @@ function ExperiencesSection({ locale }: { locale: string }) {
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {experiences.map((exp) => (
             <StaggerItem key={exp.title}>
-              <HoverLift as="article" className="card p-6 ring-1 ring-black/5 shadow-sm h-full">
+              <TiltCard className="card-warm p-6 h-full">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-14 h-14 bg-sage/20 rounded-xl flex items-center justify-center flex-shrink-0">
                     {exp.icon}
@@ -183,7 +186,7 @@ function ExperiencesSection({ locale }: { locale: string }) {
                   </span>
                   <span className="font-semibold text-forest">{exp.price}</span>
                 </div>
-              </HoverLift>
+              </TiltCard>
             </StaggerItem>
           ))}
         </StaggerContainer>
@@ -213,7 +216,7 @@ function MenuPreviewSection({ locale }: { locale: string }) {
   ]
 
   return (
-    <section className="py-20 bg-white" aria-labelledby="menu-heading">
+    <section className="py-20 section-sage" aria-labelledby="menu-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <FadeInSectionHeading id="menu-heading" className="section-title">
@@ -314,7 +317,7 @@ function GallerySection({ locale }: { locale: string }) {
   const t = useTranslations('sections')
   const isFr = locale === 'fr'
   return (
-    <section className="py-20 bg-cream" aria-labelledby="gallery-heading">
+    <section className="py-20 section-warm" aria-labelledby="gallery-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <FadeInSectionHeading id="gallery-heading" className="section-title">
@@ -361,7 +364,7 @@ function PrivateEventsSection({ locale }: { locale: string }) {
   ]
 
   return (
-    <section className="py-20 bg-blush/20" aria-labelledby="private-heading">
+    <section className="py-20 section-deep" aria-labelledby="private-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <FadeIn className="w-full">
@@ -376,11 +379,11 @@ function PrivateEventsSection({ locale }: { locale: string }) {
             </div>
           </FadeIn>
           <div>
-            <FadeInSectionHeading id="private-heading" className="section-title">
+            <FadeInSectionHeading id="private-heading" className="text-3xl md:text-4xl font-serif text-cream mb-4">
               {t('private_title')}
             </FadeInSectionHeading>
             <FadeIn delay={0.1}>
-              <p className="section-subtitle mb-8">{t('private_subtitle')}</p>
+              <p className="text-lg text-cream/70 max-w-2xl mb-8">{t('private_subtitle')}</p>
             </FadeIn>
             <StaggerContainer className="grid grid-cols-2 gap-4 mb-8" staggerDelay={0.08}>
               {eventTypes.map(({ icon, label }) => (

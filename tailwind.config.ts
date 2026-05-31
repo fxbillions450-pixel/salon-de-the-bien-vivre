@@ -9,13 +9,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: '#F7F1E8',
-        sage: '#A8BFA3',
-        forest: '#314D3B',
-        terracotta: '#C97855',
-        blush: '#E8C7B7',
-        brown: '#6B4F3F',
-        charcoal: '#2B2926',
+        // Backgrounds
+        cream: '#FFF6EA',
+        oat: '#F3E5D0',
+        'tea-beige': '#EAD2B7',
+        sand: '#DDBF9A',
+        // Accents
+        terracotta: '#C96F4A',
+        'burnt-orange': '#D9824B',
+        honey: '#D6A84F',
+        matcha: '#8AA66A',
+        sage: '#556B45',
+        forest: '#263D2B',
+        blush: '#E8B9A8',
+        cocoa: '#5A3E2B',
+        // Text
+        espresso: '#2A1F19',
+        charcoal: '#322820',
+        brown: '#6B4A35',
       },
       fontFamily: {
         serif: ['Playfair Display', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],

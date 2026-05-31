@@ -3,13 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --color-cream: #F7F1E8;
-  --color-sage: #A8BFA3;
-  --color-forest: #314D3B;
-  --color-terracotta: #C97855;
-  --color-blush: #E8C7B7;
-  --color-brown: #6B4F3F;
-  --color-charcoal: #2B2926;
+  --color-cream: #FFF6EA;
+  --color-oat: #F3E5D0;
+  --color-tea-beige: #EAD2B7;
+  --color-sand: #DDBF9A;
+  --color-terracotta: #C96F4A;
+  --color-burnt-orange: #D9824B;
+  --color-honey: #D6A84F;
+  --color-matcha: #8AA66A;
+  --color-sage: #556B45;
+  --color-forest: #263D2B;
+  --color-blush: #E8B9A8;
+  --color-cocoa: #5A3E2B;
+  --color-espresso: #2A1F19;
+  --color-charcoal: #322820;
+  --color-brown: #6B4A35;
 }
 
 * { box-sizing: border-box; }
@@ -18,7 +26,7 @@ html { scroll-behavior: smooth; }
 
 body {
   background-color: var(--color-cream);
-  color: var(--color-charcoal);
+  color: var(--color-espresso);
   font-family: var(--font-inter, Inter, system-ui, sans-serif);
   line-height: 1.6;
 }
@@ -36,15 +44,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  @apply bg-terracotta text-white px-6 py-3 rounded-full font-medium hover:bg-brown transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-terracotta focus:ring-offset-2;
+  @apply bg-terracotta text-white px-6 py-3 rounded-full font-medium hover:bg-cocoa transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-terracotta focus:ring-offset-2 shadow-md hover:shadow-lg;
 }
 
 .btn-secondary {
-  @apply border-2 border-forest text-forest px-6 py-3 rounded-full font-medium hover:bg-forest hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2;
+  @apply border-2 border-forest text-forest px-6 py-3 rounded-full font-medium hover:bg-forest hover:text-cream transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2;
+}
+
+.btn-honey {
+  @apply bg-honey text-espresso px-6 py-3 rounded-full font-medium hover:bg-burnt-orange hover:text-white transition-all duration-200 shadow-md;
 }
 
 .card {
   @apply bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300;
+}
+
+.card-warm {
+  @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-oat;
 }
 
 .section-title {
@@ -55,6 +71,26 @@ h1, h2, h3, h4, h5, h6 {
   @apply text-lg text-brown/80 max-w-2xl;
 }
 
+.section-warm {
+  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-oat) 50%, var(--color-cream) 100%);
+}
+
+.section-sage {
+  background: linear-gradient(135deg, #EDF3EA 0%, #E2EDD9 50%, #EDF3EA 100%);
+}
+
+.section-deep {
+  background: linear-gradient(135deg, var(--color-forest) 0%, #1a2d20 50%, var(--color-forest) 100%);
+}
+
+.warm-glow {
+  box-shadow: 0 0 40px rgba(201, 111, 74, 0.15), 0 4px 24px rgba(0,0,0,0.08);
+}
+
+.honey-glow:hover {
+  box-shadow: 0 0 30px rgba(214, 168, 79, 0.3), 0 8px 32px rgba(0,0,0,0.12);
+}
+
 /* Hero gradient CSS fallback (used when WebGL/reduced-motion) */
 @keyframes hero-breathe {
   0%, 100% { opacity: 1; }
@@ -62,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-gradient-fallback {
-  background: linear-gradient(135deg, #F5F0E8 0%, #E8F0E8 50%, #F5F0E8 100%);
+  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-oat) 50%, var(--color-cream) 100%);
   animation: hero-breathe 8s ease-in-out infinite;
 }
 
@@ -99,5 +135,39 @@ h1, h2, h3, h4, h5, h6 {
   .img-hover-zoom > div,
   .card-lift:hover {
     transform: none;
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes blob-morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50% { border-radius: 50% 60% 30% 60% / 30% 70% 60% 40%; }
+  75% { border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%; }
+}
+
+@keyframes steam-rise {
+  0% { transform: translateY(0) scaleX(1); opacity: 0.6; }
+  50% { transform: translateY(-20px) scaleX(1.2); opacity: 0.3; }
+  100% { transform: translateY(-40px) scaleX(0.8); opacity: 0; }
+}
+
+@keyframes warm-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.animate-float { animation: float-gentle 6s ease-in-out infinite; }
+.animate-blob { animation: blob-morph 12s ease-in-out infinite; }
+.animate-steam { animation: steam-rise 3s ease-out infinite; }
+.animate-warm-pulse { animation: warm-pulse 4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float, .animate-blob, .animate-steam, .animate-warm-pulse {
+    animation: none;
   }
 }

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ChevronDown } from 'lucide-react'
-import { FadeIn, StaggerContainer, StaggerItem } from '@/components/home/AnimatedSections'
+import { FadeIn, StaggerContainer, StaggerItem, ImmersivePageHeader } from '@/components/home/AnimatedSections'
 
 interface FaqItem {
   question: string
@@ -221,21 +221,13 @@ export default function FaqPage() {
     <>
       <Header />
       <main id="main-content">
-        {/* Hero */}
-        <section className="bg-forest py-16" aria-labelledby="faq-heading">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <FadeIn>
-              <h1 id="faq-heading" className="font-serif text-4xl md:text-5xl text-cream mb-4">
-                {isFr ? 'Foire aux questions' : 'FAQ'}
-              </h1>
-              <p className="text-cream/70 text-lg max-w-xl mx-auto">
-                {isFr
-                  ? 'Les réponses à vos questions les plus fréquentes.'
-                  : 'Answers to your most frequently asked questions.'}
-              </p>
-            </FadeIn>
-          </div>
-        </section>
+        <ImmersivePageHeader
+          label="FAQ"
+          heading={isFr ? 'Foire aux questions' : 'FAQ'}
+          subheading={isFr
+            ? 'Les réponses à vos questions les plus fréquentes.'
+            : 'Answers to your most frequently asked questions.'}
+        />
 
         <section className="py-16 bg-cream">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

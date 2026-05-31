@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { FadeIn } from '@/components/home/AnimatedSections'
+import { FadeIn, ImmersivePageHeader } from '@/components/home/AnimatedSections'
 
 const eventTypes_fr = [
   'Anniversaire',
@@ -78,19 +78,22 @@ export default function LocationPriveePage() {
     <>
       <Header />
       <main id="main-content">
-        {/* Hero */}
-        <section className="bg-forest py-20" aria-labelledby="private-heading">
+        <ImmersivePageHeader
+          label={isFr ? 'Location privée' : 'Private rental'}
+          heading={isFr ? 'Réservez votre espace privé' : 'Book your private space'}
+          subheading={isFr
+            ? 'Notre salon est disponible pour vos événements privés : anniversaires, baby showers, ateliers et plus encore.'
+            : 'Our salon is available for your private events: birthdays, baby showers, workshops and more.'}
+        />
+
+        {/* Event types + image */}
+        <section className="py-16 section-deep" aria-labelledby="private-event-types">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <FadeIn>
-                <h1 id="private-heading" className="font-serif text-4xl md:text-5xl text-cream mb-6">
-                  {isFr ? 'Réservez votre espace privé' : 'Book your private space'}
-                </h1>
-                <p className="text-cream/80 text-lg leading-relaxed mb-6">
-                  {isFr
-                    ? 'Notre salon est disponible pour vos événements privés : anniversaires, baby showers, ateliers, cercles bien-être, séances de contenu et plus encore. Un cadre chaleureux et intimiste pour vos moments spéciaux.'
-                    : 'Our salon is available for your private events: birthdays, baby showers, workshops, wellness circles, content sessions and more. A warm and intimate setting for your special moments.'}
-                </p>
+                <h2 id="private-event-types" className="font-serif text-3xl text-cream mb-6">
+                  {isFr ? 'Types d\'événements' : 'Event types'}
+                </h2>
                 <ul className="space-y-2">
                   {eventTypes.map((type) => (
                     <li key={type} className="flex items-center gap-2 text-cream/80 text-sm">
@@ -101,7 +104,7 @@ export default function LocationPriveePage() {
                 </ul>
               </FadeIn>
               <FadeIn delay={0.15}>
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg warm-glow">
                   <Image
                     src="/images/interior-full-event.jpg"
                     alt={isFr ? 'Location privée au Salon de Thé Bien Vivre' : 'Private rental at Salon de Thé Bien Vivre'}
@@ -116,7 +119,7 @@ export default function LocationPriveePage() {
         </section>
 
         {/* Form */}
-        <section className="py-16 bg-cream" aria-labelledby="inquiry-form-heading">
+        <section className="py-16 section-warm" aria-labelledby="inquiry-form-heading">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
             <h2 id="inquiry-form-heading" className="font-serif text-3xl text-forest mb-2 text-center">

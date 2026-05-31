@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Clock, Users } from 'lucide-react'
-import { StaggerContainer, StaggerItem, HoverLift, FadeIn } from '@/components/home/AnimatedSections'
+import { StaggerContainer, StaggerItem, TiltCard, FadeIn, ImmersivePageHeader } from '@/components/home/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -124,14 +124,11 @@ export default async function ExperiencesPage({
     <>
       <Header />
       <main id="main-content">
-        <div className="bg-forest py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <FadeIn>
-              <h1 className="text-4xl font-serif text-cream mb-4">{t('page_title')}</h1>
-              <p className="text-cream/70 text-lg max-w-2xl mx-auto">{t('page_description')}</p>
-            </FadeIn>
-          </div>
-        </div>
+        <ImmersivePageHeader
+          label="Expériences"
+          heading={t('page_title')}
+          subheading={t('page_description')}
+        />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <FadeIn>
@@ -147,7 +144,7 @@ export default async function ExperiencesPage({
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.08}>
             {placeholderExperiences.map((exp) => (
               <StaggerItem key={exp.id}>
-                <HoverLift as="article" className="card flex flex-col overflow-hidden ring-1 ring-black/5 shadow-sm h-full">
+                <TiltCard className="card-warm flex flex-col overflow-hidden h-full">
                   <div className="relative aspect-[16/9] overflow-hidden rounded-t-2xl">
                     <Image
                       src={exp.image}
@@ -191,7 +188,7 @@ export default async function ExperiencesPage({
                       </Link>
                     </div>
                   </div>
-                </HoverLift>
+                </TiltCard>
               </StaggerItem>
             ))}
           </StaggerContainer>
