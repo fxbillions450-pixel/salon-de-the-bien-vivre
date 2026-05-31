@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { useParams } from 'next/navigation'
+import Image from 'next/image'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { FadeIn } from '@/components/home/AnimatedSections'
 
 const eventTypes_fr = [
@@ -101,10 +101,15 @@ export default function LocationPriveePage() {
                 </ul>
               </FadeIn>
               <FadeIn delay={0.15}>
-                <ImagePlaceholder
-                  label={isFr ? 'Espace privé Bien Vivre' : 'Bien Vivre private space'}
-                  aspectRatio="aspect-[4/3]"
-                />
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+                  <Image
+                    src="/images/interior-full-event.jpg"
+                    alt={isFr ? 'Location privée au Salon de Thé Bien Vivre' : 'Private rental at Salon de Thé Bien Vivre'}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
               </FadeIn>
             </div>
           </div>

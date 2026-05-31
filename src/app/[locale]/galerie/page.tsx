@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSections'
 
 export async function generateMetadata({
@@ -21,18 +21,18 @@ export async function generateMetadata({
 }
 
 const galleryItems = [
-  { label_fr: 'Photo intérieure — espace principal', label_en: 'Interior photo — main space', needed: true },
-  { label_fr: 'Photo thés & infusions', label_en: 'Teas & infusions photo', needed: true },
-  { label_fr: 'Photo atelier créatif', label_en: 'Creative workshop photo', needed: true },
-  { label_fr: 'Photo yoga', label_en: 'Yoga photo', needed: true },
-  { label_fr: 'Photo plantes', label_en: 'Plants photo', needed: true },
-  { label_fr: 'Photo repas végétalien', label_en: 'Vegan meal photo', needed: true },
-  { label_fr: 'Photo lounge soir', label_en: 'Evening lounge photo', needed: true },
-  { label_fr: 'Photo événement pop-up', label_en: 'Pop-up event photo', needed: true },
-  { label_fr: 'Photo bar thés', label_en: 'Tea bar photo', needed: true },
-  { label_fr: 'Photo atelier peinture', label_en: 'Painting workshop photo', needed: true },
-  { label_fr: 'Photo extérieur', label_en: 'Exterior photo', needed: true },
-  { label_fr: 'Photo équipe', label_en: 'Team photo', needed: true },
+  { src: '/images/interior-full-event.jpg', label_fr: 'Espace principal — événement', label_en: 'Main space — event' },
+  { src: '/images/interior-event.jpg', label_fr: 'Salon & communauté', label_en: 'Salon & community' },
+  { src: '/images/interior-customers.jpg', label_fr: 'Détente au salon', label_en: 'Relaxing at the salon' },
+  { src: '/images/food-tea-tray.jpg', label_fr: 'Service de thé', label_en: 'Tea service' },
+  { src: '/images/food-soup.jpg', label_fr: 'Cuisine végétalienne', label_en: 'Vegan cuisine' },
+  { src: '/images/food-avocado.jpg', label_fr: 'Repas maison', label_en: 'Homemade meals' },
+  { src: '/images/wellness-ballet.jpg', label_fr: 'Bien-être & mouvement', label_en: 'Wellness & movement' },
+  { src: '/images/wellness-splits.jpg', label_fr: 'Performance artistique', label_en: 'Artistic performance' },
+  { src: '/images/event-embroidery.jpg', label_fr: 'Atelier créatif', label_en: 'Creative workshop' },
+  { src: '/images/event-chess.jpg', label_fr: 'Jeux & relaxation', label_en: 'Games & relaxation' },
+  { src: '/images/market-jewelry.jpg', label_fr: 'Pop-up & artisanat', label_en: 'Pop-up & craft market' },
+  { src: '/images/owner-community.jpg', label_fr: 'Notre communauté', label_en: 'Our community' },
 ]
 
 export default async function GaleriePage({
@@ -82,10 +82,15 @@ export default async function GaleriePage({
               {galleryItems.map((item) => (
                 <StaggerItem key={item.label_fr}>
                   <div className="group relative img-hover-zoom">
-                    <ImagePlaceholder
-                      label={isFr ? item.label_fr : item.label_en}
-                      aspectRatio="aspect-square"
-                    />
+                    <div className="relative aspect-square rounded-xl overflow-hidden">
+                      <Image
+                        src={item.src}
+                        alt={isFr ? item.label_fr : item.label_en}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
                     <div className="mt-2 text-center">
                       <p className="text-xs text-brown/60">
                         {isFr ? item.label_fr : item.label_en}
@@ -95,11 +100,6 @@ export default async function GaleriePage({
                 </StaggerItem>
               ))}
             </StaggerContainer>
-            <p className="text-center text-sm text-brown/50 italic mt-10">
-              {isFr
-                ? '[Les photos seront ajoutées prochainement par l\'administrateur]'
-                : '[Photos will be added soon by the administrator]'}
-            </p>
           </div>
         </section>
       </main>

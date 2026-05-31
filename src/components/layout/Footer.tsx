@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl'
 import { Instagram, Facebook } from 'lucide-react'
 
@@ -46,9 +47,13 @@ export function Footer() {
               className="inline-flex items-center gap-2 mb-3"
               aria-label="Salon de Thé Bien Vivre — Accueil"
             >
-              <div className="w-8 h-8 bg-sage rounded-full flex items-center justify-center">
-                <span className="text-forest text-xs font-serif font-bold">BV</span>
-              </div>
+              <Image
+                src="/images/logo-badge.png"
+                alt="Bien Vivre Salon de Thé"
+                width={36}
+                height={36}
+                className="rounded-full"
+              />
               <span className="font-serif text-xl text-cream">Bien Vivre</span>
             </Link>
             <p className="text-sm text-cream/60 mb-4">{t('tagline')}</p>

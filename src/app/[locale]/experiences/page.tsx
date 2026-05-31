@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { Clock, Users } from 'lucide-react'
 import { StaggerContainer, StaggerItem, HoverLift, FadeIn } from '@/components/home/AnimatedSections'
 
@@ -21,6 +21,7 @@ const placeholderExperiences = [
   {
     id: 'yoga-matin',
     category: 'wellness',
+    image: '/images/wellness-ballet.jpg',
     title_fr: 'Yoga du matin',
     title_en: 'Morning yoga',
     short_fr: '[Description à définir — séance de yoga pour bien commencer la journée]',
@@ -33,6 +34,7 @@ const placeholderExperiences = [
   {
     id: 'pilates-the',
     category: 'wellness',
+    image: '/images/wellness-splits.jpg',
     title_fr: 'Pilates & thé',
     title_en: 'Pilates & tea',
     short_fr: '[Description à définir — pilates suivi d\'une dégustation de thé]',
@@ -45,6 +47,7 @@ const placeholderExperiences = [
   {
     id: 'meditation',
     category: 'wellness',
+    image: '/images/interior-dining.jpg',
     title_fr: 'Méditation guidée',
     title_en: 'Guided meditation',
     short_fr: '[Description à définir — séance de méditation et pleine conscience]',
@@ -57,6 +60,7 @@ const placeholderExperiences = [
   {
     id: 'atelier-aquarelle',
     category: 'creative',
+    image: '/images/event-embroidery.jpg',
     title_fr: 'Atelier aquarelle',
     title_en: 'Watercolour workshop',
     short_fr: '[Description à définir — initiation à la peinture aquarelle pour tous niveaux]',
@@ -69,6 +73,7 @@ const placeholderExperiences = [
   {
     id: 'atelier-ceramique',
     category: 'creative',
+    image: '/images/market-jewelry.jpg',
     title_fr: 'Atelier céramique',
     title_en: 'Ceramics workshop',
     short_fr: '[Description à définir — modelage et décoration de céramique]',
@@ -81,6 +86,7 @@ const placeholderExperiences = [
   {
     id: 'degustation-the',
     category: 'tasting',
+    image: '/images/food-tea-tray.jpg',
     title_fr: 'Dégustation de thés du monde',
     title_en: 'World tea tasting',
     short_fr: '[Description à définir — découverte guidée des thés des quatre coins du monde]',
@@ -142,11 +148,15 @@ export default async function ExperiencesPage({
             {placeholderExperiences.map((exp) => (
               <StaggerItem key={exp.id}>
                 <HoverLift as="article" className="card flex flex-col overflow-hidden ring-1 ring-black/5 shadow-sm h-full">
-                  <ImagePlaceholder
-                    label={locale === 'fr' ? exp.title_fr : exp.title_en}
-                    aspectRatio="aspect-[16/9]"
-                    className="rounded-b-none"
-                  />
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-t-2xl">
+                    <Image
+                      src={exp.image}
+                      alt={locale === 'fr' ? exp.title_fr : exp.title_en}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-start justify-between gap-2 mb-3">
                       <span

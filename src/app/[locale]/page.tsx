@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { MapPin, Clock, Phone, Instagram, Leaf, Heart, Sparkles, Users, Calendar, ChevronRight } from 'lucide-react'
 import { AnimatedHero } from '@/components/home/AnimatedHero'
 import {
@@ -274,10 +274,26 @@ function AmbianceSection() {
             </div>
           </FadeIn>
           <StaggerContainer className="grid grid-cols-2 gap-4" staggerDelay={0.1}>
-            <StaggerItem><ImagePlaceholder label="Ambiance salon" aspectRatio="aspect-square" /></StaggerItem>
-            <StaggerItem><ImagePlaceholder label="Thé servi" aspectRatio="aspect-square" /></StaggerItem>
-            <StaggerItem><ImagePlaceholder label="Atelier créatif" aspectRatio="aspect-square" /></StaggerItem>
-            <StaggerItem><ImagePlaceholder label="Espace bien-être" aspectRatio="aspect-square" /></StaggerItem>
+            <StaggerItem>
+              <div className="relative aspect-square rounded-xl overflow-hidden">
+                <Image src="/images/interior-customers.jpg" alt="Clients au salon" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+              </div>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="relative aspect-square rounded-xl overflow-hidden">
+                <Image src="/images/food-tea-tray.jpg" alt="Service de thé au Bien Vivre" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+              </div>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="relative aspect-square rounded-xl overflow-hidden">
+                <Image src="/images/event-embroidery.jpg" alt="Atelier créatif au salon" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+              </div>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="relative aspect-square rounded-xl overflow-hidden">
+                <Image src="/images/wellness-ballet.jpg" alt="Espace bien-être" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+              </div>
+            </StaggerItem>
           </StaggerContainer>
         </div>
       </div>
@@ -285,16 +301,18 @@ function AmbianceSection() {
   )
 }
 
+const galleryImages = [
+  { src: '/images/interior-event.jpg', labelFr: 'Salle principale', labelEn: 'Main room' },
+  { src: '/images/food-tea-tray.jpg', labelFr: 'Service de thé', labelEn: 'Tea service' },
+  { src: '/images/wellness-splits.jpg', labelFr: 'Espace bien-être', labelEn: 'Wellness space' },
+  { src: '/images/food-croissant.jpg', labelFr: 'Pâtisseries', labelEn: 'Pastries' },
+  { src: '/images/event-community.jpg', labelFr: 'Événement communautaire', labelEn: 'Community event' },
+  { src: '/images/event-embroidery.jpg', labelFr: 'Atelier créatif', labelEn: 'Creative workshop' },
+]
+
 function GallerySection({ locale }: { locale: string }) {
   const t = useTranslations('sections')
-  const labels = [
-    'Vue de la salle principale',
-    'Bar à thé',
-    'Atelier yoga',
-    'Pâtisseries maison',
-    'Décoration intérieure',
-    'Événement privé',
-  ]
+  const isFr = locale === 'fr'
   return (
     <section className="py-20 bg-cream" aria-labelledby="gallery-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -307,9 +325,17 @@ function GallerySection({ locale }: { locale: string }) {
           </FadeIn>
         </div>
         <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8" staggerDelay={0.07}>
-          {labels.map((label) => (
-            <StaggerItem key={label}>
-              <ImagePlaceholder label={label} aspectRatio="aspect-square" />
+          {galleryImages.map((img) => (
+            <StaggerItem key={img.src}>
+              <div className="relative aspect-square rounded-2xl overflow-hidden img-hover-zoom">
+                <Image
+                  src={img.src}
+                  alt={isFr ? img.labelFr : img.labelEn}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
+              </div>
             </StaggerItem>
           ))}
         </StaggerContainer>
@@ -339,7 +365,15 @@ function PrivateEventsSection({ locale }: { locale: string }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <FadeIn className="w-full">
-            <ImagePlaceholder label="Événement privé au salon" aspectRatio="aspect-[4/3]" />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+              <Image
+                src="/images/interior-full-event.jpg"
+                alt="Événement privé au Salon de Thé Bien Vivre"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </FadeIn>
           <div>
             <FadeInSectionHeading id="private-heading" className="section-title">

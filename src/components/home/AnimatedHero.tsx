@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { HeroVisual } from '@/components/visuals/HeroVisual'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 
 interface AnimatedHeroProps {
   locale: string
@@ -104,10 +104,16 @@ export function AnimatedHero({
             initial={shouldReduceMotion ? undefined : 'hidden'}
             animate={shouldReduceMotion ? undefined : 'visible'}
           >
-            <ImagePlaceholder
-              label="Vue intérieure du Salon de Thé Bien Vivre"
-              aspectRatio="aspect-[4/3]"
-            />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+              <Image
+                src="/images/interior-full-event.jpg"
+                alt="Intérieur du Salon de Thé Bien Vivre avec des clients"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </motion.div>
         </div>
       </div>

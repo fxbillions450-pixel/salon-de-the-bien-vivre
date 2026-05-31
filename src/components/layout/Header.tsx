@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
@@ -45,9 +46,14 @@ export function Header() {
             className="flex items-center gap-2 group"
             aria-label="Salon de Thé Bien Vivre — Accueil"
           >
-            <div className="w-8 h-8 bg-forest rounded-full flex items-center justify-center">
-              <span className="text-cream text-xs font-serif font-bold">BV</span>
-            </div>
+            <Image
+              src="/images/logo-badge.png"
+              alt="Bien Vivre Salon de Thé"
+              width={40}
+              height={40}
+              className="rounded-full"
+              priority
+            />
             <span className="font-serif text-xl text-forest group-hover:text-terracotta transition-colors">
               Bien Vivre
             </span>

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { Clock, Users } from 'lucide-react'
 import { FadeIn, StaggerContainer, StaggerItem, HoverLift } from '@/components/ui/AnimatedSections'
 
@@ -20,6 +20,7 @@ export async function generateMetadata({
 const wellnessServices = [
   {
     id: 'yoga-matin',
+    image: '/images/wellness-ballet.jpg',
     title_fr: 'Yoga du matin',
     title_en: 'Morning yoga',
     desc_fr: '[Description à définir — séance de yoga accessible à tous les niveaux pour bien commencer la journée]',
@@ -31,6 +32,7 @@ const wellnessServices = [
   },
   {
     id: 'pilates',
+    image: '/images/wellness-splits.jpg',
     title_fr: 'Pilates',
     title_en: 'Pilates',
     desc_fr: '[Description à définir — renforcement musculaire doux et alignement du corps]',
@@ -42,6 +44,7 @@ const wellnessServices = [
   },
   {
     id: 'meditation',
+    image: '/images/interior-dining.jpg',
     title_fr: 'Méditation guidée',
     title_en: 'Guided meditation',
     desc_fr: '[Description à définir — séance de pleine conscience et respiration pour libérer le stress]',
@@ -53,6 +56,7 @@ const wellnessServices = [
   },
   {
     id: 'yoga-soir',
+    image: '/images/wellness-ballet-2.jpg',
     title_fr: 'Yoga du soir',
     title_en: 'Evening yoga',
     desc_fr: '[Description à définir — yoga doux et restauratif pour décompresser après la journée]',
@@ -64,6 +68,7 @@ const wellnessServices = [
   },
   {
     id: 'respiration',
+    image: '/images/wellness-ballet-3.jpg',
     title_fr: 'Atelier respiration & bien-être',
     title_en: 'Breathing & wellness workshop',
     desc_fr: '[Description à définir — techniques de respiration pour la gestion du stress et l\'énergie]',
@@ -75,6 +80,7 @@ const wellnessServices = [
   },
   {
     id: 'the-bien-etre',
+    image: '/images/food-tea-tray.jpg',
     title_fr: 'Thé & bien-être',
     title_en: 'Tea & wellness',
     desc_fr: '[Description à définir — découverte des propriétés des thés et herbes pour la santé]',
@@ -126,11 +132,15 @@ export default async function BienEtrePage({
             {wellnessServices.map((s) => (
               <StaggerItem key={s.id}>
               <HoverLift as="article" className="card flex flex-col overflow-hidden h-full">
-                <ImagePlaceholder
-                  label={isFr ? s.title_fr : s.title_en}
-                  aspectRatio="aspect-video"
-                  className="rounded-b-none"
-                />
+                <div className="relative aspect-video overflow-hidden rounded-t-2xl">
+                  <Image
+                    src={s.image}
+                    alt={isFr ? s.title_fr : s.title_en}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 <div className="p-6 flex flex-col flex-1">
                   <h2 className="font-serif text-xl text-forest mb-2">
                     {isFr ? s.title_fr : s.title_en}

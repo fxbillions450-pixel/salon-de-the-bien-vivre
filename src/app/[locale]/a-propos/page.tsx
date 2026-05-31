@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSections'
 
 export async function generateMetadata({
@@ -81,10 +81,9 @@ export default async function AProposPage({
                 </p>
               </FadeIn>
               <FadeIn delay={0.15}>
-                <ImagePlaceholder
-                  label={isFr ? 'Intérieur du salon' : 'Salon interior'}
-                  aspectRatio="aspect-[4/3]"
-                />
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
+                  <Image src="/images/interior-dining.jpg" alt={isFr ? 'Intérieur du Salon de Thé Bien Vivre' : 'Interior of Salon de Thé Bien Vivre'} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                </div>
               </FadeIn>
             </div>
           </div>
@@ -181,15 +180,9 @@ export default async function AProposPage({
         {/* Team image */}
         <section className="py-16 bg-forest" aria-label={isFr ? 'Notre équipe' : 'Our team'}>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ImagePlaceholder
-              label={isFr ? 'Photo de l\'équipe — à ajouter' : 'Team photo — to be added'}
-              aspectRatio="aspect-[16/6]"
-            />
-            <p className="text-center text-cream/60 text-sm mt-4">
-              {isFr
-                ? '[Photo de l\'équipe et présentation des membres à ajouter par l\'administrateur]'
-                : '[Team photo and member introductions to be added by administrator]'}
-            </p>
+            <div className="relative aspect-[16/6] rounded-2xl overflow-hidden shadow-md">
+              <Image src="/images/owner-serving.jpg" alt={isFr ? 'L\'équipe du Salon de Thé Bien Vivre' : 'The Salon de Thé Bien Vivre team'} fill className="object-cover object-top" sizes="100vw" />
+            </div>
           </div>
         </section>
       </main>

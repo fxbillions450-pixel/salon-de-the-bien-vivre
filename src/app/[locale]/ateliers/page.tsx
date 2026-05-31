@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { Clock, Users } from 'lucide-react'
 import { FadeIn, StaggerContainer, StaggerItem, HoverLift } from '@/components/ui/AnimatedSections'
 
@@ -20,6 +20,7 @@ export async function generateMetadata({
 const workshops = [
   {
     id: 'aquarelle',
+    image: '/images/event-embroidery.jpg',
     title_fr: 'Atelier aquarelle',
     title_en: 'Watercolour workshop',
     desc_fr: '[Description à définir — initiation à la peinture aquarelle pour tous niveaux. Matériel fourni.]',
@@ -32,6 +33,7 @@ const workshops = [
   },
   {
     id: 'ceramique',
+    image: '/images/market-jewelry.jpg',
     title_fr: 'Atelier céramique',
     title_en: 'Ceramics workshop',
     desc_fr: '[Description à définir — modelage, décoration et cuisson de pièces en céramique]',
@@ -44,6 +46,7 @@ const workshops = [
   },
   {
     id: 'calligraphie',
+    image: '/images/event-chess.jpg',
     title_fr: 'Atelier calligraphie',
     title_en: 'Calligraphy workshop',
     desc_fr: '[Description à définir — initiation à la calligraphie moderne ou traditionnelle]',
@@ -56,6 +59,7 @@ const workshops = [
   },
   {
     id: 'macrame',
+    image: '/images/event-embroidery.jpg',
     title_fr: 'Atelier macramé',
     title_en: 'Macramé workshop',
     desc_fr: '[Description à définir — créez un objet de décoration en macramé]',
@@ -68,6 +72,7 @@ const workshops = [
   },
   {
     id: 'degustation-the-creation',
+    image: '/images/food-tea-tray.jpg',
     title_fr: 'Créer son mélange de thé',
     title_en: 'Create your tea blend',
     desc_fr: '[Description à définir — atelier de création de mélanges de thé personnalisés]',
@@ -80,6 +85,7 @@ const workshops = [
   },
   {
     id: 'broderie',
+    image: '/images/event-embroidery.jpg',
     title_fr: 'Atelier broderie',
     title_en: 'Embroidery workshop',
     desc_fr: '[Description à définir — initiation à la broderie sur tissu]',
@@ -132,11 +138,15 @@ export default async function AteliersPage({
             {workshops.map((w) => (
               <StaggerItem key={w.id}>
               <HoverLift as="article" className="card flex flex-col overflow-hidden h-full">
-                <ImagePlaceholder
-                  label={isFr ? w.title_fr : w.title_en}
-                  aspectRatio="aspect-video"
-                  className="rounded-b-none"
-                />
+                <div className="relative aspect-video overflow-hidden rounded-t-2xl">
+                  <Image
+                    src={w.image}
+                    alt={isFr ? w.title_fr : w.title_en}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 <div className="p-6 flex flex-col flex-1">
                   <h2 className="font-serif text-xl text-forest mb-2">
                     {isFr ? w.title_fr : w.title_en}
