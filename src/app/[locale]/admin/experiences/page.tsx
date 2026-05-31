@@ -1,6 +1,8 @@
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
-import Link from 'next/link'
 import { formatCurrency, formatDate } from '@/lib/utils'
+import type { Database } from '@/lib/supabase/database.types'
+
+type Experience = Database['public']['Tables']['experiences']['Row']
 
 export default async function AdminExperiencesPage({
   params,
@@ -11,11 +13,12 @@ export default async function AdminExperiencesPage({
   const isFr = locale === 'fr'
 
   const adminClient = await createAdminSupabaseClient()
-  const { data: experiences } = await adminClient
+  const { data } = await adminClient
     .from('experiences')
     .select('*')
     .order('start_time', { ascending: true })
     .limit(50)
+  const experiences = (data ?? []) as Experience[]
 
   const statusColors: Record<string, string> = {
     draft: 'bg-yellow-100 text-yellow-700',
@@ -35,7 +38,7 @@ export default async function AdminExperiencesPage({
         </button>
       </div>
 
-      {!experiences || experiences.length === 0 ? (
+      {experiences.length === 0 ? (
         <div className="card p-8 text-center text-brown/60">
           {isFr ? 'Aucune expérience créée.' : 'No experiences created yet.'}
         </div>
@@ -69,7 +72,7 @@ export default async function AdminExperiencesPage({
                     {formatCurrency(exp.price_cents, isFr ? 'fr-CA' : 'en-CA')}
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[exp.status] || 'bg-gray-100 text-gray-700'}`}>
+                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[exp.status] ?? 'bg-gray-100 text-gray-700'}`}>
                       {exp.status}
                     </span>
                   </td>

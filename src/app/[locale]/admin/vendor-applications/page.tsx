@@ -1,4 +1,7 @@
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
+import type { Database } from '@/lib/supabase/database.types'
+
+type VendorApplication = Database['public']['Tables']['vendor_applications']['Row']
 
 export default async function AdminVendorApplicationsPage({
   params,
@@ -9,11 +12,12 @@ export default async function AdminVendorApplicationsPage({
   const isFr = locale === 'fr'
 
   const adminClient = await createAdminSupabaseClient()
-  const { data: applications } = await adminClient
+  const { data } = await adminClient
     .from('vendor_applications')
     .select('*')
     .order('created_at', { ascending: false })
     .limit(50)
+  const applications = (data ?? []) as VendorApplication[]
 
   const statusColors: Record<string, string> = {
     new: 'bg-yellow-100 text-yellow-700',
@@ -29,7 +33,7 @@ export default async function AdminVendorApplicationsPage({
         {isFr ? 'Candidatures vendeurs' : 'Vendor applications'}
       </h1>
 
-      {!applications || applications.length === 0 ? (
+      {applications.length === 0 ? (
         <div className="card p-8 text-center text-brown/60">
           {isFr ? 'Aucune candidature reçue.' : 'No applications received yet.'}
         </div>
@@ -41,7 +45,7 @@ export default async function AdminVendorApplicationsPage({
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <h2 className="font-semibold text-forest">{app.business_name}</h2>
-                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[app.status] || 'bg-gray-100 text-gray-700'}`}>
+                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[app.status] ?? 'bg-gray-100 text-gray-700'}`}>
                       {app.status}
                     </span>
                   </div>
@@ -51,7 +55,7 @@ export default async function AdminVendorApplicationsPage({
                       <p>{app.contact_name}</p>
                     </div>
                     <div>
-                      <p className="text-xs font-medium text-charcoal/60">{isFr ? 'Email' : 'Email'}</p>
+                      <p className="text-xs font-medium text-charcoal/60">Email</p>
                       <p>{app.email}</p>
                     </div>
                     <div>
@@ -60,14 +64,16 @@ export default async function AdminVendorApplicationsPage({
                     </div>
                     <div>
                       <p className="text-xs font-medium text-charcoal/60">{isFr ? 'Date souhaitée' : 'Preferred date'}</p>
-                      <p>{app.preferred_date}</p>
+                      <p>{String(app.preferred_date)}</p>
                     </div>
                   </div>
                   {app.instagram && (
                     <p className="text-xs text-brown/50 mt-1">Instagram: {app.instagram}</p>
                   )}
                   {app.message && (
-                    <p className="text-sm text-charcoal/70 mt-2 italic">{app.message.substring(0, 150)}{app.message.length > 150 ? '…' : ''}</p>
+                    <p className="text-sm text-charcoal/70 mt-2 italic">
+                      {app.message.substring(0, 150)}{app.message.length > 150 ? '…' : ''}
+                    </p>
                   )}
                 </div>
                 <p className="text-xs text-brown/40 whitespace-nowrap">

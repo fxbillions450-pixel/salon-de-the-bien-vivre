@@ -1,4 +1,7 @@
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
+import type { Database } from '@/lib/supabase/database.types'
+
+type AuditLog = Database['public']['Tables']['audit_logs']['Row']
 
 export default async function AdminAuditLogsPage({
   params,
@@ -9,11 +12,12 @@ export default async function AdminAuditLogsPage({
   const isFr = locale === 'fr'
 
   const adminClient = await createAdminSupabaseClient()
-  const { data: logs } = await adminClient
+  const { data: logsData } = await adminClient
     .from('audit_logs')
     .select('*')
     .order('created_at', { ascending: false })
     .limit(100)
+  const logs = (logsData ?? []) as AuditLog[]
 
   const actionColors: Record<string, string> = {
     CREATE: 'bg-green-100 text-green-700',
@@ -27,7 +31,7 @@ export default async function AdminAuditLogsPage({
         {isFr ? 'Journaux d\'audit' : 'Audit logs'}
       </h1>
 
-      {!logs || logs.length === 0 ? (
+      {logs.length === 0 ? (
         <div className="card p-8 text-center text-brown/60">
           {isFr ? 'Aucune entrée dans les journaux.' : 'No audit log entries yet.'}
         </div>

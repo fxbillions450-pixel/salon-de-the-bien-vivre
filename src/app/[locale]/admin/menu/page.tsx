@@ -1,4 +1,7 @@
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
+import type { Database } from '@/lib/supabase/database.types'
+
+type MenuCategory = Database['public']['Tables']['menu_categories']['Row']
 
 export default async function AdminMenuPage({
   params,
@@ -9,10 +12,11 @@ export default async function AdminMenuPage({
   const isFr = locale === 'fr'
 
   const adminClient = await createAdminSupabaseClient()
-  const { data: categories } = await adminClient
+  const { data } = await adminClient
     .from('menu_categories')
-    .select('*, menu_items(count)')
+    .select('*')
     .order('sort_order', { ascending: true })
+  const categories = (data ?? []) as MenuCategory[]
 
   return (
     <div className="p-8">
@@ -23,9 +27,9 @@ export default async function AdminMenuPage({
         </button>
       </div>
 
-      {!categories || categories.length === 0 ? (
+      {categories.length === 0 ? (
         <div className="card p-8 text-center text-brown/60">
-          {isFr ? 'Aucune catégorie de menu créée.' : 'No menu categories created yet.'}
+          <p>{isFr ? 'Aucune catégorie de menu créée.' : 'No menu categories created yet.'}</p>
           <p className="text-sm mt-2">
             {isFr
               ? 'Exécutez les migrations Supabase pour initialiser le menu.'

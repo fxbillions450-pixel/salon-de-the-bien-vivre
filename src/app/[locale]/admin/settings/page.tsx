@@ -1,4 +1,7 @@
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
+import type { Database } from '@/lib/supabase/database.types'
+
+type Setting = Database['public']['Tables']['settings']['Row']
 
 export default async function AdminSettingsPage({
   params,
@@ -9,24 +12,23 @@ export default async function AdminSettingsPage({
   const isFr = locale === 'fr'
 
   const adminClient = await createAdminSupabaseClient()
-  const { data: settings } = await adminClient
+  const { data } = await adminClient
     .from('settings')
     .select('*')
     .order('key', { ascending: true })
+  const settings = (data ?? []) as Setting[]
 
   const defaultSettings = [
-    { key: 'site.hours', label: isFr ? 'Heures d\'ouverture' : 'Opening hours', type: 'text' },
+    { key: 'site.hours', label: isFr ? "Heures d'ouverture" : 'Opening hours', type: 'text' },
     { key: 'site.phone', label: isFr ? 'Téléphone' : 'Phone', type: 'text' },
     { key: 'site.email', label: isFr ? 'Courriel contact' : 'Contact email', type: 'email' },
     { key: 'site.instagram', label: 'Instagram URL', type: 'url' },
     { key: 'site.facebook', label: 'Facebook URL', type: 'url' },
-    { key: 'site.address_note_fr', label: isFr ? 'Note adresse (FR)' : 'Address note (FR)', type: 'text' },
-    { key: 'site.address_note_en', label: isFr ? 'Note adresse (EN)' : 'Address note (EN)', type: 'text' },
     { key: 'reservation.enabled', label: isFr ? 'Réservations activées' : 'Reservations enabled', type: 'boolean' },
     { key: 'newsletter.enabled', label: isFr ? 'Infolettre activée' : 'Newsletter enabled', type: 'boolean' },
   ]
 
-  const settingsMap = new Map(settings?.map(s => [s.key, s.value]) ?? [])
+  const settingsMap = new Map(settings.map(s => [s.key, s.value]))
 
   return (
     <div className="p-8">
@@ -40,8 +42,8 @@ export default async function AdminSettingsPage({
       <div className="bg-terracotta/10 border border-terracotta/30 rounded-xl p-4 mb-8">
         <p className="text-sm text-brown">
           {isFr
-            ? 'Cette interface de paramètres est fonctionnelle une fois la base de données configurée. Les modifications sont sauvegardées via l\'API /api/admin/settings.'
-            : 'This settings interface is functional once the database is configured. Changes are saved via the /api/admin/settings API.'}
+            ? "Les modifications sont sauvegardées via l'API /api/admin/settings."
+            : 'Changes are saved via the /api/admin/settings API.'}
         </p>
       </div>
 

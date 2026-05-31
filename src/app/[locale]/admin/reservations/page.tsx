@@ -1,5 +1,10 @@
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
-import { formatCurrency, formatDate, formatTime } from '@/lib/utils'
+import { formatCurrency, formatDate } from '@/lib/utils'
+import type { Database } from '@/lib/supabase/database.types'
+
+type Reservation = Database['public']['Tables']['reservations']['Row'] & {
+  experiences: { title_fr: string; title_en: string; start_time: string } | null
+}
 
 export default async function AdminReservationsPage({
   params,
@@ -10,11 +15,12 @@ export default async function AdminReservationsPage({
   const isFr = locale === 'fr'
 
   const adminClient = await createAdminSupabaseClient()
-  const { data: reservations } = await adminClient
+  const { data } = await adminClient
     .from('reservations')
     .select('*, experiences(title_fr, title_en, start_time)')
     .order('created_at', { ascending: false })
     .limit(50)
+  const reservations = (data ?? []) as Reservation[]
 
   const statusColors: Record<string, string> = {
     pending: 'bg-yellow-100 text-yellow-700',
@@ -34,7 +40,7 @@ export default async function AdminReservationsPage({
         {isFr ? 'Réservations' : 'Reservations'}
       </h1>
 
-      {!reservations || reservations.length === 0 ? (
+      {reservations.length === 0 ? (
         <div className="card p-8 text-center text-brown/60">
           {isFr ? 'Aucune réservation pour le moment.' : 'No reservations yet.'}
         </div>
@@ -59,16 +65,16 @@ export default async function AdminReservationsPage({
                     <p className="text-brown/60 text-xs">{r.email}</p>
                   </td>
                   <td className="px-4 py-3 text-charcoal">
-                    {r.experiences ? (isFr ? (r.experiences as { title_fr: string }).title_fr : (r.experiences as { title_en: string }).title_en) : '—'}
+                    {r.experiences ? (isFr ? r.experiences.title_fr : r.experiences.title_en) : '—'}
                   </td>
                   <td className="px-4 py-3 text-brown/70">
-                    {r.experiences ? formatDate((r.experiences as { start_time: string }).start_time, isFr ? 'fr-CA' : 'en-CA') : '—'}
+                    {r.experiences ? formatDate(r.experiences.start_time, isFr ? 'fr-CA' : 'en-CA') : '—'}
                   </td>
                   <td className="px-4 py-3 text-charcoal text-center">{r.quantity}</td>
                   <td className="px-4 py-3 text-charcoal">{formatCurrency(r.total_amount_cents, isFr ? 'fr-CA' : 'en-CA')}</td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[r.status] || 'bg-gray-100 text-gray-700'}`}>
-                      {statusLabels[r.status] || r.status}
+                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[r.status] ?? 'bg-gray-100 text-gray-700'}`}>
+                      {statusLabels[r.status] ?? r.status}
                     </span>
                   </td>
                 </tr>
