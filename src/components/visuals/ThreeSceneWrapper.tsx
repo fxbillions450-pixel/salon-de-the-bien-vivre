@@ -1,10 +1,10 @@
 'use client'
 
 import { useReducedMotion } from 'framer-motion'
-import { Suspense, useEffect, useState, type ReactNode } from 'react'
+import { Suspense, useEffect, useState, useCallback, type ReactNode } from 'react'
 
 interface ThreeSceneWrapperProps {
-  children: ReactNode
+  children: (opts: { onContextLost: () => void; isMobile: boolean }) => ReactNode
   fallback?: ReactNode
   className?: string
   height?: string
@@ -14,26 +14,37 @@ function detectWebGL(): boolean {
   if (typeof window === 'undefined') return false
   try {
     const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
-    return !!ctx
+    return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
   } catch {
     return false
   }
 }
 
-export function ThreeSceneWrapper({ children, fallback = null, className = '', height = '100%' }: ThreeSceneWrapperProps) {
+/**
+ * Safe wrapper for all Three.js canvas scenes.
+ * Checks WebGL availability, reduced-motion, and tracks context loss.
+ * Children receive { onContextLost, isMobile } to wire into their Canvas.
+ */
+export function ThreeSceneWrapper({
+  children,
+  fallback = null,
+  className = '',
+  height = '100%',
+}: ThreeSceneWrapperProps) {
   const shouldReduceMotion = useReducedMotion()
   const [hasWebGL, setHasWebGL] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [contextLost, setContextLost] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  const handleContextLost = useCallback(() => {
+    setContextLost(true)
+  }, [])
 
   useEffect(() => {
     setMounted(true)
     setHasWebGL(detectWebGL())
-
-    const handleContextLost = () => setContextLost(true)
-    window.addEventListener('webglcontextlost', handleContextLost)
-    return () => window.removeEventListener('webglcontextlost', handleContextLost)
+    setIsMobile(typeof window !== 'undefined' && window.innerWidth < 768)
   }, [])
 
   if (!mounted || !hasWebGL || shouldReduceMotion || contextLost) {
@@ -46,7 +57,9 @@ export function ThreeSceneWrapper({ children, fallback = null, className = '', h
       className={`pointer-events-none ${className}`}
       style={{ height }}
     >
-      <Suspense fallback={null}>{children}</Suspense>
+      <Suspense fallback={null}>
+        {children({ onContextLost: handleContextLost, isMobile })}
+      </Suspense>
     </div>
   )
 }
