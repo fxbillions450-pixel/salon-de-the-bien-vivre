@@ -13,7 +13,9 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "test:smoke": "playwright test --config=playwright.smoke.config.ts",
     "check:schema": "tsx scripts/check-schema-consistency.ts",
+    "check:prod": "npm run build && npm run test:smoke",
     "check": "npm run lint && npm run typecheck && npm run test:coverage && npm run check:schema"
   },
   "dependencies": {

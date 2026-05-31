@@ -166,7 +166,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-cream/10 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-cream/40">
-            {t('copyright').replace('{year}', new Date().getFullYear().toString())}
+            {t('copyright', { year: new Date().getFullYear() })}
           </p>
           <div className="flex gap-4 text-xs">
             <Link

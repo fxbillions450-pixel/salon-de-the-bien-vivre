@@ -434,16 +434,17 @@ function NewsletterSection() {
 
 function ContactSection({ locale }: { locale: string }) {
   const t = useTranslations('contact')
+  const tSections = useTranslations('sections')
   return (
     <section className="py-20 bg-white" aria-labelledby="contact-section-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 id="contact-section-heading" className="section-title">
-              {useTranslations('sections')('contact_title')}
+              {tSections('contact_title')}
             </h2>
             <p className="section-subtitle mb-8">
-              {useTranslations('sections')('contact_subtitle')}
+              {tSections('contact_subtitle')}
             </p>
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-3">
