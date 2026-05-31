@@ -1,4 +1,8 @@
 import { createAdminSupabaseClient } from '@/lib/supabase/server'
+import type { Database } from '@/lib/supabase/database.types'
+
+type PrivateEventInquiry = Database['public']['Tables']['private_event_inquiries']['Row']
+type ContactMessage = Database['public']['Tables']['contact_messages']['Row']
 
 export default async function AdminInquiriesPage({
   params,
@@ -9,13 +13,12 @@ export default async function AdminInquiriesPage({
   const isFr = locale === 'fr'
 
   const adminClient = await createAdminSupabaseClient()
-  const [
-    { data: privateEvents },
-    { data: contactMessages },
-  ] = await Promise.all([
+  const [{ data: peData }, { data: cmData }] = await Promise.all([
     adminClient.from('private_event_inquiries').select('*').order('created_at', { ascending: false }).limit(25),
     adminClient.from('contact_messages').select('*').order('created_at', { ascending: false }).limit(25),
   ])
+  const privateEvents = (peData ?? []) as PrivateEventInquiry[]
+  const contactMessages = (cmData ?? []) as ContactMessage[]
 
   const statusColors: Record<string, string> = {
     new: 'bg-yellow-100 text-yellow-700',
@@ -34,12 +37,11 @@ export default async function AdminInquiriesPage({
         {isFr ? 'Demandes & Messages' : 'Inquiries & Messages'}
       </h1>
 
-      {/* Private event inquiries */}
       <section className="mb-10">
         <h2 className="text-xl font-serif text-forest mb-4">
-          {isFr ? 'Demandes d\'événements privés' : 'Private event inquiries'}
+          {isFr ? "Demandes d'événements privés" : 'Private event inquiries'}
         </h2>
-        {!privateEvents || privateEvents.length === 0 ? (
+        {privateEvents.length === 0 ? (
           <div className="card p-6 text-center text-brown/60">
             {isFr ? 'Aucune demande.' : 'No inquiries yet.'}
           </div>
@@ -63,10 +65,10 @@ export default async function AdminInquiriesPage({
                       <p className="text-xs text-brown/60">{pe.email}</p>
                     </td>
                     <td className="px-4 py-3 text-charcoal">{pe.event_type}</td>
-                    <td className="px-4 py-3 text-brown/70">{pe.preferred_date}</td>
+                    <td className="px-4 py-3 text-brown/70">{String(pe.preferred_date)}</td>
                     <td className="px-4 py-3 text-charcoal text-center">{pe.guest_count}</td>
                     <td className="px-4 py-3">
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[pe.status] || 'bg-gray-100 text-gray-700'}`}>
+                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[pe.status] ?? 'bg-gray-100 text-gray-700'}`}>
                         {pe.status}
                       </span>
                     </td>
@@ -78,12 +80,11 @@ export default async function AdminInquiriesPage({
         )}
       </section>
 
-      {/* Contact messages */}
       <section>
         <h2 className="text-xl font-serif text-forest mb-4">
           {isFr ? 'Messages de contact' : 'Contact messages'}
         </h2>
-        {!contactMessages || contactMessages.length === 0 ? (
+        {contactMessages.length === 0 ? (
           <div className="card p-6 text-center text-brown/60">
             {isFr ? 'Aucun message.' : 'No messages yet.'}
           </div>
@@ -95,13 +96,15 @@ export default async function AdminInquiriesPage({
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-1">
                       <p className="font-medium text-charcoal">{msg.name}</p>
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${statusColors[msg.status] || 'bg-gray-100 text-gray-700'}`}>
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${statusColors[msg.status] ?? 'bg-gray-100 text-gray-700'}`}>
                         {msg.status}
                       </span>
                       <span className="text-xs text-brown/50">{msg.category}</span>
                     </div>
                     <p className="text-sm text-brown/70 mb-1">{msg.email}</p>
-                    <p className="text-sm text-charcoal/80">{msg.message.substring(0, 200)}{msg.message.length > 200 ? '…' : ''}</p>
+                    <p className="text-sm text-charcoal/80">
+                      {msg.message.substring(0, 200)}{msg.message.length > 200 ? '…' : ''}
+                    </p>
                   </div>
                   <p className="text-xs text-brown/40 whitespace-nowrap">
                     {new Date(msg.created_at).toLocaleDateString(isFr ? 'fr-CA' : 'en-CA')}
