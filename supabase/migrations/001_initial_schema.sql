@@ -1,8 +1,7 @@
 -- ============================================================
--- Salon de Thé Bien Vivre — Initial Schema Migration
+-- Salon de Thé Bien Vivre — Initial Schema (idempotent)
 -- ============================================================
 
--- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
@@ -105,10 +104,24 @@ CREATE TABLE IF NOT EXISTS experiences (
     CHECK (status IN ('draft', 'published', 'cancelled', 'completed')),
   is_featured BOOLEAN NOT NULL DEFAULT FALSE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  CONSTRAINT experiences_capacity_check CHECK (spots_reserved + spots_confirmed <= capacity)
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Add capacity check constraint only if it doesn't already exist
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'experiences_capacity_check'
+      AND conrelid = 'public.experiences'::regclass
+  ) THEN
+    ALTER TABLE experiences
+      ADD CONSTRAINT experiences_capacity_check
+      CHECK (spots_reserved + spots_confirmed <= capacity);
+  END IF;
+END $$;
+
+-- Add unique constraint for webhook events only if it doesn't exist
 CREATE INDEX IF NOT EXISTS idx_experiences_status ON experiences(status);
 CREATE INDEX IF NOT EXISTS idx_experiences_start_time ON experiences(start_time);
 CREATE INDEX IF NOT EXISTS idx_experiences_category ON experiences(category);
@@ -316,9 +329,20 @@ CREATE TABLE IF NOT EXISTS webhook_events (
   processed BOOLEAN NOT NULL DEFAULT FALSE,
   processed_at TIMESTAMPTZ,
   error TEXT,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  CONSTRAINT webhook_events_source_event_unique UNIQUE (source, event_id)
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'webhook_events_source_event_unique'
+      AND conrelid = 'public.webhook_events'::regclass
+  ) THEN
+    ALTER TABLE webhook_events
+      ADD CONSTRAINT webhook_events_source_event_unique UNIQUE (source, event_id);
+  END IF;
+END $$;
 
 CREATE INDEX IF NOT EXISTS idx_webhook_events_processed ON webhook_events(processed);
 CREATE INDEX IF NOT EXISTS idx_webhook_events_event_id ON webhook_events(event_id);
@@ -348,7 +372,6 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
--- Apply trigger to all tables with updated_at
 DO $$
 DECLARE
   t TEXT;
