@@ -1,0 +1,302 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "menu": "Menu",
+    "experiences": "Expériences",
+    "workshops": "Ateliers",
+    "wellness": "Bien-être",
+    "events": "Événements & Popups",
+    "private": "Location privée",
+    "about": "À propos",
+    "gallery": "Galerie",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "book": "Réserver",
+    "admin": "Administration"
+  },
+  "hero": {
+    "headline": "Un refuge de douceur\nau cœur de Montréal",
+    "subheadline": "Salon de thé, café-lounge & espace bien-être dans le quartier Rosemont — Saint-Zotique Est",
+    "cta_primary": "Découvrir nos expériences",
+    "cta_secondary": "Voir le menu",
+    "cta_tertiary": "Nous trouver",
+    "alert": "Bienvenue chez Bien Vivre — consultez nos ateliers et réservations."
+  },
+  "common": {
+    "book": "Réserver",
+    "learn_more": "En savoir plus",
+    "view_all": "Voir tout",
+    "spots_remaining": "{count} place(s) restante(s)",
+    "sold_out": "Complet",
+    "loading": "Chargement…",
+    "error": "Une erreur est survenue",
+    "success": "Succès !",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "submit": "Envoyer",
+    "required_field": "Champ obligatoire",
+    "optional": "facultatif",
+    "per_person": "par personne",
+    "currency": "CAD"
+  },
+  "sections": {
+    "experiences_title": "Nos expériences",
+    "experiences_subtitle": "Ateliers, séances bien-être et événements pour prendre soin de vous",
+    "menu_title": "Notre menu",
+    "menu_subtitle": "Thés, boissons, repas et pâtisseries préparés avec soin",
+    "gallery_title": "L'ambiance Bien Vivre",
+    "gallery_subtitle": "Un espace chaleureux et authentique vous attend",
+    "private_title": "Événements privés",
+    "private_subtitle": "Célébrez vos moments précieux dans notre espace",
+    "newsletter_title": "Restez connectés",
+    "newsletter_subtitle": "Recevez nos nouvelles, ateliers et offres exclusives",
+    "contact_title": "Nous trouver",
+    "contact_subtitle": "Venez nous rendre visite ou écrivez-nous",
+    "about_title": "Notre histoire",
+    "about_subtitle": "Un lieu né de la passion du thé et du bien-être"
+  },
+  "info": {
+    "address": "1951 Rue Saint-Zotique Est, Montréal",
+    "hours_title": "Heures d'ouverture",
+    "hours_placeholder": "[HORAIRES À DÉFINIR]",
+    "phone_placeholder": "[TÉLÉPHONE À DÉFINIR]",
+    "email_placeholder": "[COURRIEL À DÉFINIR]",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+  "menu": {
+    "page_title": "Notre menu",
+    "page_description": "Découvrez notre sélection de thés, boissons, repas végétaliens et pâtisseries maison.",
+    "price_placeholder": "[PRIX À DÉFINIR]",
+    "info_note": "Menu informationnel uniquement — les prix et disponibilités peuvent varier.",
+    "allergen_note": "Veuillez informer notre équipe de toute allergie alimentaire.",
+    "vegan": "Végétalien",
+    "caffeine_free": "Sans caféine",
+    "gluten_free": "Sans gluten",
+    "nut_free": "Sans noix",
+    "seasonal": "Saisonnier",
+    "house_made": "Fait maison",
+    "categories": {
+      "teas": "Thés",
+      "hot_drinks": "Boissons chaudes",
+      "cold_drinks": "Boissons froides",
+      "food": "Plats",
+      "pastries": "Pâtisseries",
+      "snacks": "En-cas",
+      "wine": "Vins & bulles",
+      "cocktails": "Cocktails sans alcool"
+    }
+  },
+  "experiences": {
+    "page_title": "Expériences & ateliers",
+    "page_description": "Réservez une expérience unique : yoga, pilates, ateliers créatifs, dégustations de thé et plus.",
+    "filter_all": "Tout",
+    "filter_wellness": "Bien-être",
+    "filter_creative": "Créatif",
+    "filter_tasting": "Dégustation",
+    "filter_workshop": "Atelier",
+    "duration": "Durée",
+    "minutes": "min",
+    "instructor": "Animateur·rice",
+    "included": "Ce qui est inclus",
+    "requirements": "Ce qu'il faut apporter",
+    "book_now": "Réserver maintenant",
+    "sold_out": "Complet",
+    "coming_soon": "Bientôt disponible",
+    "no_experiences": "Aucune expérience disponible pour le moment.",
+    "loading": "Chargement des expériences…"
+  },
+  "reservation": {
+    "title": "Réservation",
+    "step_info": "Vos informations",
+    "step_payment": "Paiement",
+    "step_confirm": "Confirmation",
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "quantity": "Nombre de places",
+    "notes": "Notes ou demandes spéciales",
+    "notes_placeholder": "Allergies, mobilité réduite, occasion spéciale…",
+    "consent_terms": "J'accepte les conditions d'utilisation et la politique d'annulation",
+    "payment_title": "Paiement sécurisé",
+    "payment_note": "Votre paiement est traité de manière sécurisée par Square.",
+    "total": "Total",
+    "confirm_button": "Confirmer et payer",
+    "success_title": "Réservation confirmée !",
+    "success_message": "Un courriel de confirmation vous a été envoyé.",
+    "error_generic": "Une erreur est survenue. Veuillez réessayer.",
+    "error_sold_out": "Désolé, cette expérience est complète.",
+    "error_payment": "Le paiement a échoué. Veuillez vérifier vos informations."
+  },
+  "contact": {
+    "page_title": "Contactez-nous",
+    "page_description": "Nous sommes là pour répondre à toutes vos questions.",
+    "form_title": "Envoyez-nous un message",
+    "name": "Nom complet",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "phone_optional": "Téléphone (facultatif)",
+    "category": "Sujet",
+    "category_general": "Question générale",
+    "category_reservation": "Réservation",
+    "category_private_event": "Événement privé",
+    "category_workshop": "Atelier",
+    "category_popup": "Popup / Marché",
+    "category_media": "Médias",
+    "category_other": "Autre",
+    "message": "Message",
+    "message_placeholder": "Votre message…",
+    "submit": "Envoyer le message",
+    "success": "Votre message a été envoyé avec succès ! Nous vous répondrons dans les meilleurs délais.",
+    "error": "Impossible d'envoyer le message. Veuillez réessayer.",
+    "map_title": "Nous trouver sur la carte"
+  },
+  "newsletter": {
+    "title": "Restez dans la boucle",
+    "subtitle": "Ateliers, nouveaux thés, événements spéciaux — soyez les premiers informés.",
+    "email_placeholder": "Votre adresse courriel",
+    "first_name_placeholder": "Prénom (facultatif)",
+    "consent": "J'accepte de recevoir les nouvelles de Salon de Thé Bien Vivre. Je peux me désabonner en tout temps.",
+    "submit": "S'inscrire",
+    "success": "Merci ! Vous êtes maintenant inscrit·e à notre infolettre.",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "privacy_note": "Nous respectons votre vie privée. Aucun spam."
+  },
+  "private_event": {
+    "page_title": "Location privée & événements",
+    "page_description": "Célébrez vos moments précieux : anniversaires, mariages, lancements, retraites en entreprise.",
+    "form_title": "Demande d'information",
+    "name": "Nom complet",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "event_type": "Type d'événement",
+    "event_type_placeholder": "Ex. : Anniversaire, mariage, shower, lancement de produit…",
+    "preferred_date": "Date souhaitée",
+    "preferred_time": "Heure souhaitée",
+    "guest_count": "Nombre d'invités",
+    "budget_range": "Budget approximatif",
+    "budget_range_placeholder": "Ex. : 500$–1000$",
+    "food_drink_needs": "Besoins alimentaires",
+    "food_drink_needs_placeholder": "Service traiteur, bar à thé, boissons…",
+    "message": "Message supplémentaire",
+    "message_placeholder": "Décrivez votre événement…",
+    "consent": "J'accepte les conditions d'utilisation",
+    "submit": "Envoyer la demande",
+    "success": "Votre demande a été reçue ! Nous vous contacterons sous 48h.",
+    "error": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "vendor": {
+    "page_title": "Marchés & Popups",
+    "page_description": "Organisez votre popup ou participez à nos marchés créatifs.",
+    "form_title": "Candidature vendeur·se",
+    "business_name": "Nom de l'entreprise",
+    "contact_name": "Nom du contact",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "instagram": "Instagram",
+    "instagram_placeholder": "@votrecompte",
+    "product_type": "Type de produits",
+    "product_type_placeholder": "Céramique, bijoux, cosmétiques naturels…",
+    "preferred_date": "Date souhaitée",
+    "space_needs": "Besoins en espace",
+    "space_needs_placeholder": "Table, étagères, électricité…",
+    "message": "Message",
+    "consent": "J'accepte les conditions de participation",
+    "submit": "Soumettre la candidature",
+    "success": "Votre candidature a été soumise ! Nous vous répondrons sous 5 jours ouvrables.",
+    "error": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "about": {
+    "page_title": "À propos de Bien Vivre",
+    "page_description": "Notre histoire, nos valeurs et notre équipe.",
+    "story_title": "Notre histoire",
+    "story_placeholder": "[TEXTE À DÉFINIR — racontez l'histoire du salon, sa fondatrice/fondateur, sa vision]",
+    "values_title": "Nos valeurs",
+    "team_title": "Notre équipe",
+    "team_placeholder": "[PHOTOS ET BIOS DE L'ÉQUIPE À AJOUTER]"
+  },
+  "faq": {
+    "page_title": "Foire aux questions",
+    "page_description": "Toutes les réponses à vos questions.",
+    "no_answer": "Vous ne trouvez pas votre réponse ? Contactez-nous.",
+    "contact_us": "Contactez-nous"
+  },
+  "footer": {
+    "tagline": "Thé, bien-être & ateliers à Montréal",
+    "navigation": "Navigation",
+    "legal": "Légal",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "cancellation": "Politique d'annulation",
+    "copyright": "© {year} Salon de Thé Bien Vivre. Tous droits réservés.",
+    "follow_us": "Suivez-nous",
+    "hours": "Heures d'ouverture",
+    "address": "Adresse"
+  },
+  "pages": {
+    "home": {
+      "title": "Accueil",
+      "description": "Salon de thé, café-lounge et espace bien-être à Montréal. Thés, repas végétaliens, yoga, pilates, ateliers créatifs."
+    },
+    "menu": {
+      "title": "Menu",
+      "description": "Découvrez notre menu de thés, boissons, plats végétaliens et pâtisseries."
+    },
+    "experiences": {
+      "title": "Expériences & ateliers",
+      "description": "Réservez yoga, pilates, ateliers créatifs et dégustations de thé."
+    },
+    "workshops": {
+      "title": "Ateliers créatifs",
+      "description": "Peinture, céramique, calligraphie et autres ateliers créatifs."
+    },
+    "wellness": {
+      "title": "Bien-être",
+      "description": "Yoga, pilates, méditation et soins bien-être."
+    },
+    "events": {
+      "title": "Événements & Popups",
+      "description": "Marchés créatifs, popups artisanaux et événements spéciaux."
+    },
+    "private": {
+      "title": "Location privée",
+      "description": "Réservez notre espace pour vos événements privés."
+    },
+    "about": {
+      "title": "À propos",
+      "description": "Notre histoire, nos valeurs et notre équipe."
+    },
+    "gallery": {
+      "title": "Galerie",
+      "description": "Photos de l'espace, des événements et de l'ambiance Bien Vivre."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Contactez-nous ou venez nous rendre visite."
+    },
+    "faq": {
+      "title": "FAQ",
+      "description": "Questions fréquentes sur nos services."
+    }
+  },
+  "errors": {
+    "required": "Ce champ est obligatoire",
+    "email_invalid": "Adresse courriel invalide",
+    "min_length": "Minimum {min} caractères",
+    "max_length": "Maximum {max} caractères",
+    "min_value": "Minimum {min}",
+    "max_value": "Maximum {max}",
+    "consent_required": "Vous devez accepter les conditions",
+    "turnstile_failed": "Vérification de sécurité échouée. Veuillez réessayer.",
+    "rate_limited": "Trop de tentatives. Veuillez réessayer plus tard.",
+    "server_error": "Erreur serveur. Veuillez réessayer.",
+    "not_found": "Page introuvable",
+    "unauthorized": "Accès non autorisé"
+  }
+}

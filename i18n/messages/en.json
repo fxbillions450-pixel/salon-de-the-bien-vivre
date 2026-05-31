@@ -1,0 +1,302 @@
+{
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "experiences": "Experiences",
+    "workshops": "Workshops",
+    "wellness": "Wellness",
+    "events": "Events & Popups",
+    "private": "Private rental",
+    "about": "About",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "book": "Book",
+    "admin": "Administration"
+  },
+  "hero": {
+    "headline": "A haven of gentleness\nin the heart of Montréal",
+    "subheadline": "Tea salon, café-lounge & wellness space in the Rosemont — Saint-Zotique Est neighbourhood",
+    "cta_primary": "Discover our experiences",
+    "cta_secondary": "View the menu",
+    "cta_tertiary": "Find us",
+    "alert": "Welcome to Bien Vivre — check out our workshops and reservations."
+  },
+  "common": {
+    "book": "Book",
+    "learn_more": "Learn more",
+    "view_all": "View all",
+    "spots_remaining": "{count} spot(s) remaining",
+    "sold_out": "Sold out",
+    "loading": "Loading…",
+    "error": "An error occurred",
+    "success": "Success!",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "required_field": "Required field",
+    "optional": "optional",
+    "per_person": "per person",
+    "currency": "CAD"
+  },
+  "sections": {
+    "experiences_title": "Our experiences",
+    "experiences_subtitle": "Workshops, wellness sessions and events to take care of yourself",
+    "menu_title": "Our menu",
+    "menu_subtitle": "Teas, drinks, meals and pastries crafted with care",
+    "gallery_title": "The Bien Vivre vibe",
+    "gallery_subtitle": "A warm and authentic space awaits you",
+    "private_title": "Private events",
+    "private_subtitle": "Celebrate your special moments in our space",
+    "newsletter_title": "Stay connected",
+    "newsletter_subtitle": "Get our news, workshops and exclusive offers",
+    "contact_title": "Find us",
+    "contact_subtitle": "Come visit us or write to us",
+    "about_title": "Our story",
+    "about_subtitle": "A place born from a passion for tea and wellness"
+  },
+  "info": {
+    "address": "1951 Rue Saint-Zotique Est, Montréal",
+    "hours_title": "Opening hours",
+    "hours_placeholder": "[HOURS TO BE DEFINED]",
+    "phone_placeholder": "[PHONE TO BE DEFINED]",
+    "email_placeholder": "[EMAIL TO BE DEFINED]",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+  "menu": {
+    "page_title": "Our menu",
+    "page_description": "Discover our selection of teas, drinks, vegan meals and homemade pastries.",
+    "price_placeholder": "[PRICE TO BE DEFINED]",
+    "info_note": "Menu for information only — prices and availability may vary.",
+    "allergen_note": "Please inform our team of any food allergies.",
+    "vegan": "Vegan",
+    "caffeine_free": "Caffeine-free",
+    "gluten_free": "Gluten-free",
+    "nut_free": "Nut-free",
+    "seasonal": "Seasonal",
+    "house_made": "House-made",
+    "categories": {
+      "teas": "Teas",
+      "hot_drinks": "Hot drinks",
+      "cold_drinks": "Cold drinks",
+      "food": "Food",
+      "pastries": "Pastries",
+      "snacks": "Snacks",
+      "wine": "Wines & bubbles",
+      "cocktails": "Non-alcoholic cocktails"
+    }
+  },
+  "experiences": {
+    "page_title": "Experiences & workshops",
+    "page_description": "Book a unique experience: yoga, pilates, creative workshops, tea tastings and more.",
+    "filter_all": "All",
+    "filter_wellness": "Wellness",
+    "filter_creative": "Creative",
+    "filter_tasting": "Tasting",
+    "filter_workshop": "Workshop",
+    "duration": "Duration",
+    "minutes": "min",
+    "instructor": "Instructor",
+    "included": "What's included",
+    "requirements": "What to bring",
+    "book_now": "Book now",
+    "sold_out": "Sold out",
+    "coming_soon": "Coming soon",
+    "no_experiences": "No experiences available at the moment.",
+    "loading": "Loading experiences…"
+  },
+  "reservation": {
+    "title": "Reservation",
+    "step_info": "Your information",
+    "step_payment": "Payment",
+    "step_confirm": "Confirmation",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "quantity": "Number of spots",
+    "notes": "Notes or special requests",
+    "notes_placeholder": "Allergies, mobility needs, special occasion…",
+    "consent_terms": "I accept the terms of use and cancellation policy",
+    "payment_title": "Secure payment",
+    "payment_note": "Your payment is processed securely by Square.",
+    "total": "Total",
+    "confirm_button": "Confirm and pay",
+    "success_title": "Reservation confirmed!",
+    "success_message": "A confirmation email has been sent to you.",
+    "error_generic": "An error occurred. Please try again.",
+    "error_sold_out": "Sorry, this experience is sold out.",
+    "error_payment": "Payment failed. Please check your information."
+  },
+  "contact": {
+    "page_title": "Contact us",
+    "page_description": "We are here to answer all your questions.",
+    "form_title": "Send us a message",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "phone_optional": "Phone (optional)",
+    "category": "Subject",
+    "category_general": "General question",
+    "category_reservation": "Reservation",
+    "category_private_event": "Private event",
+    "category_workshop": "Workshop",
+    "category_popup": "Popup / Market",
+    "category_media": "Media",
+    "category_other": "Other",
+    "message": "Message",
+    "message_placeholder": "Your message…",
+    "submit": "Send message",
+    "success": "Your message was sent successfully! We will get back to you shortly.",
+    "error": "Unable to send message. Please try again.",
+    "map_title": "Find us on the map"
+  },
+  "newsletter": {
+    "title": "Stay in the loop",
+    "subtitle": "Workshops, new teas, special events — be the first to know.",
+    "email_placeholder": "Your email address",
+    "first_name_placeholder": "First name (optional)",
+    "consent": "I agree to receive news from Salon de Thé Bien Vivre. I can unsubscribe at any time.",
+    "submit": "Subscribe",
+    "success": "Thank you! You are now subscribed to our newsletter.",
+    "error": "An error occurred. Please try again.",
+    "privacy_note": "We respect your privacy. No spam."
+  },
+  "private_event": {
+    "page_title": "Private rental & events",
+    "page_description": "Celebrate your special moments: birthdays, weddings, launches, corporate retreats.",
+    "form_title": "Information request",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "event_type": "Event type",
+    "event_type_placeholder": "E.g.: Birthday, wedding, shower, product launch…",
+    "preferred_date": "Preferred date",
+    "preferred_time": "Preferred time",
+    "guest_count": "Number of guests",
+    "budget_range": "Approximate budget",
+    "budget_range_placeholder": "E.g.: $500–$1000",
+    "food_drink_needs": "Food & drink needs",
+    "food_drink_needs_placeholder": "Catering service, tea bar, drinks…",
+    "message": "Additional message",
+    "message_placeholder": "Describe your event…",
+    "consent": "I accept the terms of use",
+    "submit": "Submit request",
+    "success": "Your request has been received! We will contact you within 48 hours.",
+    "error": "An error occurred. Please try again."
+  },
+  "vendor": {
+    "page_title": "Markets & Popups",
+    "page_description": "Host your popup or participate in our creative markets.",
+    "form_title": "Vendor application",
+    "business_name": "Business name",
+    "contact_name": "Contact name",
+    "email": "Email",
+    "phone": "Phone",
+    "instagram": "Instagram",
+    "instagram_placeholder": "@youraccount",
+    "product_type": "Product type",
+    "product_type_placeholder": "Ceramics, jewellery, natural cosmetics…",
+    "preferred_date": "Preferred date",
+    "space_needs": "Space needs",
+    "space_needs_placeholder": "Table, shelving, electricity…",
+    "message": "Message",
+    "consent": "I accept the participation terms",
+    "submit": "Submit application",
+    "success": "Your application has been submitted! We will get back to you within 5 business days.",
+    "error": "An error occurred. Please try again."
+  },
+  "about": {
+    "page_title": "About Bien Vivre",
+    "page_description": "Our story, our values and our team.",
+    "story_title": "Our story",
+    "story_placeholder": "[TEXT TO BE DEFINED — tell the story of the salon, its founder, its vision]",
+    "values_title": "Our values",
+    "team_title": "Our team",
+    "team_placeholder": "[TEAM PHOTOS AND BIOS TO BE ADDED]"
+  },
+  "faq": {
+    "page_title": "Frequently asked questions",
+    "page_description": "All the answers to your questions.",
+    "no_answer": "Can't find your answer? Contact us.",
+    "contact_us": "Contact us"
+  },
+  "footer": {
+    "tagline": "Tea, wellness & workshops in Montréal",
+    "navigation": "Navigation",
+    "legal": "Legal",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "cancellation": "Cancellation policy",
+    "copyright": "© {year} Salon de Thé Bien Vivre. All rights reserved.",
+    "follow_us": "Follow us",
+    "hours": "Opening hours",
+    "address": "Address"
+  },
+  "pages": {
+    "home": {
+      "title": "Home",
+      "description": "Tea salon, café-lounge and wellness space in Montréal. Teas, vegan meals, yoga, pilates, creative workshops."
+    },
+    "menu": {
+      "title": "Menu",
+      "description": "Discover our menu of teas, drinks, vegan dishes and pastries."
+    },
+    "experiences": {
+      "title": "Experiences & workshops",
+      "description": "Book yoga, pilates, creative workshops and tea tastings."
+    },
+    "workshops": {
+      "title": "Creative workshops",
+      "description": "Painting, ceramics, calligraphy and other creative workshops."
+    },
+    "wellness": {
+      "title": "Wellness",
+      "description": "Yoga, pilates, meditation and wellness treatments."
+    },
+    "events": {
+      "title": "Events & Popups",
+      "description": "Creative markets, artisan popups and special events."
+    },
+    "private": {
+      "title": "Private rental",
+      "description": "Book our space for your private events."
+    },
+    "about": {
+      "title": "About",
+      "description": "Our story, our values and our team."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "Photos of the space, events and Bien Vivre ambiance."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Contact us or come visit."
+    },
+    "faq": {
+      "title": "FAQ",
+      "description": "Frequently asked questions about our services."
+    }
+  },
+  "errors": {
+    "required": "This field is required",
+    "email_invalid": "Invalid email address",
+    "min_length": "Minimum {min} characters",
+    "max_length": "Maximum {max} characters",
+    "min_value": "Minimum {min}",
+    "max_value": "Maximum {max}",
+    "consent_required": "You must accept the terms",
+    "turnstile_failed": "Security check failed. Please try again.",
+    "rate_limited": "Too many attempts. Please try again later.",
+    "server_error": "Server error. Please try again.",
+    "not_found": "Page not found",
+    "unauthorized": "Unauthorized access"
+  }
+}
