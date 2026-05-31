@@ -69,12 +69,12 @@ function QuickInfoSection() {
     {
       icon: <Phone className="w-6 h-6 text-terracotta" aria-hidden="true" />,
       label: 'Téléphone',
-      value: '[TÉLÉPHONE À DÉFINIR]',
+      value: '514 829-6912',
     },
     {
       icon: <Instagram className="w-6 h-6 text-terracotta" aria-hidden="true" />,
       label: 'Instagram',
-      value: '@[COMPTE À DÉFINIR]',
+      value: '@salondethe.bienvivre',
     },
   ]
   return (
@@ -494,11 +494,11 @@ function ContactSection({ locale }: { locale: string }) {
               </div>
               <div className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-terracotta flex-shrink-0" aria-hidden="true" />
-                <span className="text-charcoal">[HORAIRES À DÉFINIR]</span>
+                <span className="text-charcoal">[Horaires à confirmer]</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-terracotta flex-shrink-0" aria-hidden="true" />
-                <span className="text-charcoal">[TÉLÉPHONE À DÉFINIR]</span>
+                <a href="tel:+15148296912" className="text-charcoal hover:text-terracotta transition-colors">514 829-6912</a>
               </div>
             </div>
             <Link href={`/${locale}/contact`} className="btn-primary transition-all duration-200">
@@ -506,14 +506,17 @@ function ContactSection({ locale }: { locale: string }) {
             </Link>
           </FadeIn>
           <FadeIn delay={0.15} className="w-full">
-            <div
-              className="rounded-2xl overflow-hidden bg-sage/20 aspect-video flex items-center justify-center border-2 border-dashed border-sage/50"
-              aria-label={t('map_title')}
-            >
-              <p className="text-forest/60 text-sm text-center p-4">
-                [Carte Google Maps intégrée]<br />
-                <span className="text-xs text-brown/40">1951 Rue Saint-Zotique Est, Montréal</span>
-              </p>
+            <div className="rounded-2xl overflow-hidden aspect-video shadow-md border border-oat">
+              <iframe
+                src="https://maps.google.com/maps?q=1951+Rue+Saint-Zotique+Est,+Montr%C3%A9al,+QC+H2G+1K9&output=embed&z=16"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Salon de Thé Bien Vivre — Google Maps"
+              />
             </div>
           </FadeIn>
         </div>

@@ -59,8 +59,8 @@ export function Footer() {
             <p className="text-sm text-cream/60 mb-4">{t('tagline')}</p>
             <div className="flex gap-3">
               <a
-                href="[LIEN INSTAGRAM À DÉFINIR]"
-                aria-label="Instagram"
+                href="https://www.instagram.com/salondethe.bienvivre"
+                aria-label="Instagram — @salondethe.bienvivre"
                 className="p-2 rounded-full bg-cream/10 hover:bg-cream/20 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -68,7 +68,7 @@ export function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="[LIEN FACEBOOK À DÉFINIR]"
+                href="https://www.facebook.com/salondethe.bienvivre"
                 aria-label="Facebook"
                 className="p-2 rounded-full bg-cream/10 hover:bg-cream/20 transition-colors"
                 target="_blank"
@@ -115,16 +115,28 @@ export function Footer() {
               {t('address')}
             </h3>
             <address className="not-italic text-sm text-cream/60 space-y-2 mb-6">
-              <p>1951 Rue Saint-Zotique Est</p>
+              <p>
+                <a
+                  href="https://maps.google.com/?q=1951+Rue+Saint-Zotique+Est,+Montréal,+QC"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-cream transition-colors"
+                >
+                  1951 Rue Saint-Zotique Est
+                </a>
+              </p>
               <p>Montréal, QC</p>
-              <p>[TÉLÉPHONE À DÉFINIR]</p>
-              <p>[COURRIEL À DÉFINIR]</p>
+              <p>
+                <a href="tel:+15148296912" className="hover:text-cream transition-colors">
+                  514 829-6912
+                </a>
+              </p>
             </address>
 
             <h3 className="font-semibold text-cream mb-2 text-sm uppercase tracking-wider">
               {t('hours')}
             </h3>
-            <p className="text-sm text-cream/60">[HORAIRES À DÉFINIR]</p>
+            <p className="text-sm text-cream/60">[Horaires à confirmer]</p>
           </div>
 
           {/* Newsletter */}
