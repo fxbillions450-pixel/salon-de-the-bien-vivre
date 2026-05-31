@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
 const COLORS = [
@@ -74,18 +74,30 @@ function ParticleField({ count }: ParticleFieldProps) {
   )
 }
 
+function DisposeOnUnmount() {
+  const { gl } = useThree()
+  useEffect(() => {
+    return () => {
+      gl.dispose()
+    }
+  }, [gl])
+  return null
+}
+
 interface AmbientHeroCanvasProps {
   particleCount?: number
 }
 
-export function AmbientHeroCanvas({ particleCount = 60 }: AmbientHeroCanvasProps) {
+export function AmbientHeroCanvas({ particleCount = 40 }: AmbientHeroCanvasProps) {
   return (
     <Canvas
       aria-hidden="true"
       style={{ pointerEvents: 'none' }}
       camera={{ position: [0, 0, 8], fov: 50 }}
+      dpr={[1, 1.5]}
       gl={{ alpha: true, antialias: false, powerPreference: 'low-power' }}
     >
+      <DisposeOnUnmount />
       <ParticleField count={particleCount} />
     </Canvas>
   )

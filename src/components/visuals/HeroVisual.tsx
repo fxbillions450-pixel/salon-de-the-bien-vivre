@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 
 const AmbientHeroCanvas = dynamic(
@@ -31,7 +31,8 @@ function detectWebGL(): boolean {
 
 export function HeroVisual() {
   const [ready, setReady] = useState<'pending' | 'webgl' | 'fallback'>('pending')
-  const [particleCount, setParticleCount] = useState(60)
+  const [particleCount, setParticleCount] = useState(40)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Respect reduced motion preference
@@ -52,25 +53,33 @@ export function HeroVisual() {
 
     // Reduce particle count on mobile
     if (window.innerWidth < 768) {
-      setParticleCount(30)
+      setParticleCount(20)
     }
 
     setReady('webgl')
-
-    // Pause on visibility change
-    const handleVisibility = () => {
-      // The R3F canvas handles its own RAF; no explicit pause needed,
-      // but we can swap to fallback if we wanted. Currently a no-op.
-    }
-    document.addEventListener('visibilitychange', handleVisibility)
-    return () => document.removeEventListener('visibilitychange', handleVisibility)
   }, [])
+
+  // Handle WebGL context loss after canvas is mounted
+  useEffect(() => {
+    if (ready !== 'webgl') return
+    const container = containerRef.current
+    if (!container) return
+    const canvas = container.querySelector('canvas')
+    if (!canvas) return
+    const handleContextLost = (e: Event) => {
+      e.preventDefault()
+      setReady('fallback')
+    }
+    canvas.addEventListener('webglcontextlost', handleContextLost)
+    return () => canvas.removeEventListener('webglcontextlost', handleContextLost)
+  }, [ready])
 
   if (ready === 'pending') return null
   if (ready === 'fallback') return <CSSFallback />
 
   return (
     <div
+      ref={containerRef}
       aria-hidden="true"
       className="absolute inset-0 z-0"
       style={{ pointerEvents: 'none' }}
