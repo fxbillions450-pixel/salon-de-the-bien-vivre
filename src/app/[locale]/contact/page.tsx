@@ -141,7 +141,7 @@ export default function ContactPage() {
                 {/* Google Maps embed — no API key required */}
                 <div className="rounded-2xl overflow-hidden aspect-video mb-6 shadow-md border border-oat">
                   <iframe
-                    src="https://maps.google.com/maps?q=1951+Rue+Saint-Zotique+Est,+Montr%C3%A9al,+QC+H2G+1K9&output=embed&z=16"
+                    src="https://www.google.com/maps?q=1951+Rue+Saint-Zotique+Est,+Montr%C3%A9al,+QC+H2G+1K9&output=embed"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}

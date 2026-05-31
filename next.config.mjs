@@ -29,7 +29,7 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://*.supabase.co",
               "connect-src 'self' https://*.supabase.co https://pci-connect.squareup.com https://connect.squareupsandbox.com https://challenges.cloudflare.com",
-              "frame-src https://challenges.cloudflare.com",
+              "frame-src 'self' https://challenges.cloudflare.com https://www.google.com https://maps.google.com",
               "object-src 'none'",
               "base-uri 'self'",
             ].join('; '),

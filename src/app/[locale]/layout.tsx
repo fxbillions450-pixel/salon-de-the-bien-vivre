@@ -43,6 +43,7 @@ export const metadata: Metadata = {
     alternateLocale: 'en_CA',
     siteName: 'Salon de Thé Bien Vivre',
   },
+  manifest: '/manifest.webmanifest',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },

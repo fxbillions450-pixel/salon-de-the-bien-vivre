@@ -1,0 +1,16 @@
+{
+  "name": "Salon de Thé Bien Vivre",
+  "short_name": "Bien Vivre",
+  "description": "Salon de thé, café-lounge et espace bien-être à Montréal.",
+  "start_url": "/fr",
+  "display": "browser",
+  "background_color": "#FFF6EA",
+  "theme_color": "#263D2B",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}
