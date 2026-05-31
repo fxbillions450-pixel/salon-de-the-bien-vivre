@@ -61,8 +61,8 @@ export default async function AdminReservationsPage({
               {reservations.map((r) => (
                 <tr key={r.id} className="hover:bg-cream/30 transition-colors">
                   <td className="px-4 py-3">
-                    <p className="font-medium text-charcoal">{r.first_name} {r.last_name}</p>
-                    <p className="text-brown/60 text-xs">{r.email}</p>
+                    <p className="font-medium text-charcoal">{r.customer_first_name} {r.customer_last_name}</p>
+                    <p className="text-brown/60 text-xs">{r.customer_email}</p>
                   </td>
                   <td className="px-4 py-3 text-charcoal">
                     {r.experiences ? (isFr ? r.experiences.title_fr : r.experiences.title_en) : '—'}
@@ -71,7 +71,7 @@ export default async function AdminReservationsPage({
                     {r.experiences ? formatDate(r.experiences.start_time, isFr ? 'fr-CA' : 'en-CA') : '—'}
                   </td>
                   <td className="px-4 py-3 text-charcoal text-center">{r.quantity}</td>
-                  <td className="px-4 py-3 text-charcoal">{formatCurrency(r.total_amount_cents, isFr ? 'fr-CA' : 'en-CA')}</td>
+                  <td className="px-4 py-3 text-charcoal">{formatCurrency(r.amount_cents, isFr ? 'fr-CA' : 'en-CA')}</td>
                   <td className="px-4 py-3">
                     <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[r.status] ?? 'bg-gray-100 text-gray-700'}`}>
                       {statusLabels[r.status] ?? r.status}

@@ -52,8 +52,7 @@ export async function POST(req: NextRequest) {
     const { error: dbError } = await supabase.from('newsletter_subscribers').insert({
       email: data.email,
       first_name: data.firstName ?? null,
-      consent: true,
-      source: 'website',
+      consent_given_at: new Date().toISOString(),
       status: 'active',
     })
 

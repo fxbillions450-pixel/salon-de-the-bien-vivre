@@ -1,6 +1,9 @@
 import { redirect } from 'next/navigation'
 import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase/server'
+import type { Database } from '@/lib/supabase/database.types'
 import Link from 'next/link'
+
+type Profile = Database['public']['Tables']['profiles']['Row']
 
 export default async function AdminLayout({
   children,
@@ -18,11 +21,12 @@ export default async function AdminLayout({
   }
 
   const adminClient = await createAdminSupabaseClient()
-  const { data: profile } = await adminClient
+  const { data: profileData } = await adminClient
     .from('profiles')
     .select('role, status, full_name, email')
     .eq('id', session.user.id)
     .single()
+  const profile = profileData as Pick<Profile, 'role' | 'status' | 'full_name' | 'email'> | null
 
   if (!profile || !['owner', 'admin', 'staff', 'content_editor', 'instructor'].includes(profile.role)) {
     redirect(`/${locale}`)

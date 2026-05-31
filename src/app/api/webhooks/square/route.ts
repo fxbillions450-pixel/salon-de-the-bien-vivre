@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
   const { data: existing } = await supabase
     .from('webhook_events')
     .select('id')
-    .eq('provider_event_id', providerEventId)
+    .eq('event_id', providerEventId)
     .single()
 
   if (existing) {
@@ -49,12 +49,11 @@ export async function POST(req: NextRequest) {
 
   // Log webhook event
   await supabase.from('webhook_events').insert({
-    provider: 'square',
+    source: 'square',
     event_type: eventType ?? 'unknown',
-    provider_event_id: providerEventId,
+    event_id: providerEventId,
     payload: event,
-    signature_valid: true,
-    processed_at: new Date().toISOString(),
+    processed: false,
   })
 
   // Process payment completion

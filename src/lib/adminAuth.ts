@@ -1,16 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 import type { Database } from './supabase/database.types'
+
+type ProfileRow = Database['public']['Tables']['profiles']['Row']
 
 const ADMIN_ROLES = ['owner', 'admin'] as const
 const STAFF_ROLES = ['owner', 'admin', 'staff'] as const
 
-export async function requireAdmin(req: NextRequest): Promise<
-  { user: { id: string }; profile: { role: string } } | NextResponse
-> {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+function getAdminClient() {
+  return createClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { persistSession: false, autoRefreshToken: false } }
+  )
+}
 
+export async function requireAdmin(req: NextRequest): Promise<
+  { user: { id: string }; profile: Pick<ProfileRow, 'role'> } | NextResponse
+> {
   const authHeader = req.headers.get('authorization')
   const token = authHeader?.replace('Bearer ', '')
 
@@ -18,9 +25,7 @@ export async function requireAdmin(req: NextRequest): Promise<
     return NextResponse.json({ error: 'Non authentifié.' }, { status: 401 })
   }
 
-  const supabase = createServerClient<Database>(supabaseUrl, supabaseKey, {
-    cookies: { getAll: () => [], setAll: () => {} },
-  })
+  const supabase = getAdminClient()
 
   const { data: { user }, error } = await supabase.auth.getUser(token)
   if (error || !user) {
@@ -41,11 +46,8 @@ export async function requireAdmin(req: NextRequest): Promise<
 }
 
 export async function requireStaff(req: NextRequest): Promise<
-  { user: { id: string }; profile: { role: string } } | NextResponse
+  { user: { id: string }; profile: Pick<ProfileRow, 'role'> } | NextResponse
 > {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
-
   const authHeader = req.headers.get('authorization')
   const token = authHeader?.replace('Bearer ', '')
 
@@ -53,9 +55,7 @@ export async function requireStaff(req: NextRequest): Promise<
     return NextResponse.json({ error: 'Non authentifié.' }, { status: 401 })
   }
 
-  const supabase = createServerClient<Database>(supabaseUrl, supabaseKey, {
-    cookies: { getAll: () => [], setAll: () => {} },
-  })
+  const supabase = getAdminClient()
 
   const { data: { user }, error } = await supabase.auth.getUser(token)
   if (error || !user) {

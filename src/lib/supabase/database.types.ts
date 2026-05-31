@@ -35,6 +35,7 @@ export interface Database {
           avatar_url?: string | null
           updated_at?: string
         }
+        Relationships: []
       }
       settings: {
         Row: {
@@ -57,6 +58,7 @@ export interface Database {
           updated_by?: string | null
           updated_at?: string
         }
+        Relationships: []
       }
       menu_categories: {
         Row: {
@@ -90,6 +92,7 @@ export interface Database {
           is_active?: boolean
           updated_at?: string
         }
+        Relationships: []
       }
       menu_items: {
         Row: {
@@ -144,6 +147,15 @@ export interface Database {
           sort_order?: number
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "menu_items_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "menu_categories"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       experiences: {
         Row: {
@@ -243,20 +255,22 @@ export interface Database {
           is_featured?: boolean
           updated_at?: string
         }
+        Relationships: []
       }
       reservations: {
         Row: {
           id: string
           experience_id: string
           user_id: string | null
-          first_name: string
-          last_name: string
-          email: string
-          phone: string
+          customer_first_name: string
+          customer_last_name: string
+          customer_email: string
+          customer_phone: string
           quantity: number
-          total_amount_cents: number
+          amount_cents: number
           currency: string
           status: 'pending' | 'confirmed' | 'cancelled' | 'refunded' | 'no_show'
+          payment_status: 'pending' | 'paid' | 'failed' | 'refunded'
           square_payment_id: string | null
           square_order_id: string | null
           notes: string | null
@@ -269,14 +283,15 @@ export interface Database {
           id?: string
           experience_id: string
           user_id?: string | null
-          first_name: string
-          last_name: string
-          email: string
-          phone: string
+          customer_first_name: string
+          customer_last_name: string
+          customer_email: string
+          customer_phone: string
           quantity: number
-          total_amount_cents: number
+          amount_cents: number
           currency?: string
           status?: 'pending' | 'confirmed' | 'cancelled' | 'refunded' | 'no_show'
+          payment_status?: 'pending' | 'paid' | 'failed' | 'refunded'
           square_payment_id?: string | null
           square_order_id?: string | null
           notes?: string | null
@@ -288,14 +303,15 @@ export interface Database {
         Update: {
           experience_id?: string
           user_id?: string | null
-          first_name?: string
-          last_name?: string
-          email?: string
-          phone?: string
+          customer_first_name?: string
+          customer_last_name?: string
+          customer_email?: string
+          customer_phone?: string
           quantity?: number
-          total_amount_cents?: number
+          amount_cents?: number
           currency?: string
           status?: 'pending' | 'confirmed' | 'cancelled' | 'refunded' | 'no_show'
+          payment_status?: 'pending' | 'paid' | 'failed' | 'refunded'
           square_payment_id?: string | null
           square_order_id?: string | null
           notes?: string | null
@@ -303,6 +319,15 @@ export interface Database {
           ip_address?: string | null
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "reservations_experience_id_fkey"
+            columns: ["experience_id"]
+            isOneToOne: false
+            referencedRelation: "experiences"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       private_event_inquiries: {
         Row: {
@@ -360,6 +385,7 @@ export interface Database {
           ip_address?: string | null
           updated_at?: string
         }
+        Relationships: []
       }
       vendor_applications: {
         Row: {
@@ -414,6 +440,7 @@ export interface Database {
           ip_address?: string | null
           updated_at?: string
         }
+        Relationships: []
       }
       contact_messages: {
         Row: {
@@ -453,6 +480,7 @@ export interface Database {
           ip_address?: string | null
           updated_at?: string
         }
+        Relationships: []
       }
       newsletter_subscribers: {
         Row: {
@@ -489,6 +517,7 @@ export interface Database {
           ip_address?: string | null
           updated_at?: string
         }
+        Relationships: []
       }
       blog_posts: {
         Row: {
@@ -540,6 +569,7 @@ export interface Database {
           published_at?: string | null
           updated_at?: string
         }
+        Relationships: []
       }
       media_assets: {
         Row: {
@@ -594,6 +624,7 @@ export interface Database {
           uploaded_by?: string | null
           updated_at?: string
         }
+        Relationships: []
       }
       audit_logs: {
         Row: {
@@ -620,7 +651,17 @@ export interface Database {
           user_agent?: string | null
           created_at?: string
         }
-        Update: never
+        Update: {
+          user_id?: string | null
+          action?: string
+          table_name?: string | null
+          record_id?: string | null
+          old_values?: Record<string, unknown> | null
+          new_values?: Record<string, unknown> | null
+          ip_address?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
       }
       webhook_events: {
         Row: {
@@ -650,6 +691,7 @@ export interface Database {
           processed_at?: string | null
           error?: string | null
         }
+        Relationships: []
       }
       rate_limit_events: {
         Row: {
@@ -666,7 +708,12 @@ export interface Database {
           ip_address?: string | null
           created_at?: string
         }
-        Update: never
+        Update: {
+          identifier?: string
+          action?: string
+          ip_address?: string | null
+        }
+        Relationships: []
       }
     }
     Views: Record<string, never>

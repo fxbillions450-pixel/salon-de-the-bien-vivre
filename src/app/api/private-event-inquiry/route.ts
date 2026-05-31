@@ -42,6 +42,7 @@ export async function POST(req: NextRequest) {
       budget_range: data.budgetRange ?? null,
       food_drink_needs: data.foodDrinkNeeds ?? null,
       message: data.message ?? null,
+      consent_terms: true,
       status: 'new',
     })
 

@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
         .eq('id', data.experienceId)
       await supabase
         .from('reservations')
-        .update({ status: 'expired', payment_status: 'failed' })
+        .update({ status: 'cancelled', payment_status: 'failed' })
         .eq('id', reservationId)
       return NextResponse.json({ error: 'Erreur lors du traitement du paiement.' }, { status: 502 })
     }

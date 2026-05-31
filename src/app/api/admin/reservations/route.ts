@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
       .range(offset, offset + limit - 1)
 
     if (status) {
-      query = query.eq('status', status)
+      query = query.eq('status', status as 'pending' | 'confirmed' | 'cancelled' | 'refunded' | 'no_show')
     }
 
     const { data, error, count } = await query
