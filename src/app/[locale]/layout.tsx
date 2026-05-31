@@ -44,8 +44,11 @@ export const metadata: Metadata = {
     siteName: 'Salon de Thé Bien Vivre',
   },
   icons: {
-    icon: '/icon',
-    shortcut: '/icon',
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/icon', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
     apple: '/icon',
   },
 }
