@@ -1,8 +1,24 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
+import { Playfair_Display, Inter } from 'next/font/google'
 import { routing } from '@/i18n/routing'
 import './globals.css'
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
@@ -49,7 +65,7 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={`${playfair.variable} ${inter.variable}`}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}

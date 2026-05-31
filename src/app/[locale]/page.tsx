@@ -6,6 +6,14 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { MapPin, Clock, Phone, Instagram, Leaf, Heart, Sparkles, Users, Calendar, ChevronRight } from 'lucide-react'
+import { AnimatedHero } from '@/components/home/AnimatedHero'
+import {
+  FadeInSectionHeading,
+  StaggerContainer,
+  StaggerItem,
+  HoverLift,
+  FadeIn,
+} from '@/components/home/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -32,41 +40,14 @@ function AlertBar() {
 function HeroSection({ locale }: { locale: string }) {
   const t = useTranslations('hero')
   return (
-    <section className="bg-cream py-20 lg:py-28" aria-labelledby="hero-heading">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1
-              id="hero-heading"
-              className="text-5xl lg:text-6xl font-serif text-forest leading-tight mb-6 whitespace-pre-line"
-            >
-              {t('headline')}
-            </h1>
-            <p className="text-xl text-brown/80 mb-8 leading-relaxed">{t('subheadline')}</p>
-            <div className="flex flex-wrap gap-4">
-              <Link href={`/${locale}/experiences`} className="btn-primary text-base">
-                {t('cta_primary')}
-              </Link>
-              <Link href={`/${locale}/menu`} className="btn-secondary text-base">
-                {t('cta_secondary')}
-              </Link>
-              <Link
-                href={`/${locale}/contact`}
-                className="text-forest underline underline-offset-4 hover:text-terracotta transition-colors py-3"
-              >
-                {t('cta_tertiary')}
-              </Link>
-            </div>
-          </div>
-          <div>
-            <ImagePlaceholder
-              label="Vue intérieure du Salon de Thé Bien Vivre"
-              aspectRatio="aspect-[4/3]"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
+    <AnimatedHero
+      locale={locale}
+      headline={t('headline')}
+      subheadline={t('subheadline')}
+      ctaPrimary={t('cta_primary')}
+      ctaSecondary={t('cta_secondary')}
+      ctaTertiary={t('cta_tertiary')}
+    />
   )
 }
 
@@ -96,17 +77,19 @@ function QuickInfoSection() {
   return (
     <section className="bg-white py-12" aria-label="Informations pratiques">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map(({ icon, label, value }) => (
-            <div key={label} className="flex items-start gap-3 p-4 rounded-xl bg-cream/50">
-              <div className="mt-0.5 flex-shrink-0">{icon}</div>
-              <div>
-                <p className="text-xs text-brown/60 uppercase tracking-wider mb-0.5">{label}</p>
-                <p className="text-sm font-medium text-charcoal">{value}</p>
+            <StaggerItem key={label}>
+              <div className="flex items-start gap-3 p-4 rounded-xl bg-cream/50 ring-1 ring-black/5 shadow-sm h-full">
+                <div className="mt-0.5 flex-shrink-0">{icon}</div>
+                <div>
+                  <p className="text-xs text-brown/60 uppercase tracking-wider mb-0.5">{label}</p>
+                  <p className="text-sm font-medium text-charcoal">{value}</p>
+                </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   )
@@ -171,37 +154,41 @@ function ExperiencesSection({ locale }: { locale: string }) {
     <section className="py-20 bg-cream" aria-labelledby="experiences-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 id="experiences-heading" className="section-title">
+          <FadeInSectionHeading id="experiences-heading" className="section-title">
             {t('experiences_title')}
-          </h2>
-          <p className="section-subtitle mx-auto">{t('experiences_subtitle')}</p>
+          </FadeInSectionHeading>
+          <FadeIn delay={0.1}>
+            <p className="section-subtitle mx-auto">{t('experiences_subtitle')}</p>
+          </FadeIn>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {experiences.map((exp) => (
-            <article key={exp.title} className="card p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-14 h-14 bg-sage/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  {exp.icon}
+            <StaggerItem key={exp.title}>
+              <HoverLift as="article" className="card p-6 ring-1 ring-black/5 shadow-sm h-full">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-14 h-14 bg-sage/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                    {exp.icon}
+                  </div>
+                  <div>
+                    <span className="text-xs text-terracotta font-medium uppercase tracking-wider">
+                      {exp.category}
+                    </span>
+                    <h3 className="font-serif text-lg text-forest">{exp.title}</h3>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-xs text-terracotta font-medium uppercase tracking-wider">
-                    {exp.category}
+                <p className="text-sm text-brown/70 mb-4">{exp.description}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-brown/60">
+                    {exp.duration} {tExp('minutes')}
                   </span>
-                  <h3 className="font-serif text-lg text-forest">{exp.title}</h3>
+                  <span className="font-semibold text-forest">{exp.price}</span>
                 </div>
-              </div>
-              <p className="text-sm text-brown/70 mb-4">{exp.description}</p>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-brown/60">
-                  {exp.duration} {tExp('minutes')}
-                </span>
-                <span className="font-semibold text-forest">{exp.price}</span>
-              </div>
-            </article>
+              </HoverLift>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
         <div className="text-center mt-10">
-          <Link href={`/${locale}/experiences`} className="btn-primary">
+          <Link href={`/${locale}/experiences`} className="btn-primary transition-all duration-200">
             {tExp('book_now')}
           </Link>
         </div>
@@ -229,26 +216,27 @@ function MenuPreviewSection({ locale }: { locale: string }) {
     <section className="py-20 bg-white" aria-labelledby="menu-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 id="menu-heading" className="section-title">
+          <FadeInSectionHeading id="menu-heading" className="section-title">
             {t('menu_title')}
-          </h2>
-          <p className="section-subtitle mx-auto">{t('menu_subtitle')}</p>
+          </FadeInSectionHeading>
+          <FadeIn delay={0.1}>
+            <p className="section-subtitle mx-auto">{t('menu_subtitle')}</p>
+          </FadeIn>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8" staggerDelay={0.06}>
           {categories.map(({ key, emoji, items }) => (
-            <div
-              key={key}
-              className="p-4 rounded-2xl bg-cream/60 border border-sage/20 text-center hover:border-sage/50 transition-colors"
-            >
-              <div className="text-3xl mb-2" aria-hidden="true">{emoji}</div>
-              <p className="text-sm font-medium text-forest">{tMenu(`categories.${key}` as Parameters<typeof tMenu>[0])}</p>
-              <p className="text-xs text-brown/50 mt-0.5">{items} articles</p>
-            </div>
+            <StaggerItem key={key}>
+              <HoverLift className="p-4 rounded-2xl bg-cream/60 border border-sage/20 text-center hover:border-sage/50 transition-colors ring-1 ring-black/5 h-full">
+                <div className="text-3xl mb-2" aria-hidden="true">{emoji}</div>
+                <p className="text-sm font-medium text-forest">{tMenu(`categories.${key}` as Parameters<typeof tMenu>[0])}</p>
+                <p className="text-xs text-brown/50 mt-0.5">{items} articles</p>
+              </HoverLift>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
         <p className="text-center text-sm text-brown/60 mb-6 italic">{tMenu('info_note')}</p>
         <div className="text-center">
-          <Link href={`/${locale}/menu`} className="btn-secondary">
+          <Link href={`/${locale}/menu`} className="btn-secondary transition-all duration-200">
             {t('menu_title')} →
           </Link>
         </div>
@@ -262,7 +250,7 @@ function AmbianceSection() {
     <section className="py-20 bg-forest text-cream" aria-labelledby="ambiance-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <FadeIn className="w-full">
             <h2 id="ambiance-heading" className="text-4xl font-serif text-cream mb-6">
               Un espace conçu pour votre bien-être
             </h2>
@@ -284,13 +272,13 @@ function AmbianceSection() {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <ImagePlaceholder label="Ambiance salon" aspectRatio="aspect-square" />
-            <ImagePlaceholder label="Thé servi" aspectRatio="aspect-square" />
-            <ImagePlaceholder label="Atelier créatif" aspectRatio="aspect-square" />
-            <ImagePlaceholder label="Espace bien-être" aspectRatio="aspect-square" />
-          </div>
+          </FadeIn>
+          <StaggerContainer className="grid grid-cols-2 gap-4" staggerDelay={0.1}>
+            <StaggerItem><ImagePlaceholder label="Ambiance salon" aspectRatio="aspect-square" /></StaggerItem>
+            <StaggerItem><ImagePlaceholder label="Thé servi" aspectRatio="aspect-square" /></StaggerItem>
+            <StaggerItem><ImagePlaceholder label="Atelier créatif" aspectRatio="aspect-square" /></StaggerItem>
+            <StaggerItem><ImagePlaceholder label="Espace bien-être" aspectRatio="aspect-square" /></StaggerItem>
+          </StaggerContainer>
         </div>
       </div>
     </section>
@@ -311,18 +299,22 @@ function GallerySection({ locale }: { locale: string }) {
     <section className="py-20 bg-cream" aria-labelledby="gallery-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 id="gallery-heading" className="section-title">
+          <FadeInSectionHeading id="gallery-heading" className="section-title">
             {t('gallery_title')}
-          </h2>
-          <p className="section-subtitle mx-auto">{t('gallery_subtitle')}</p>
+          </FadeInSectionHeading>
+          <FadeIn delay={0.1}>
+            <p className="section-subtitle mx-auto">{t('gallery_subtitle')}</p>
+          </FadeIn>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8" staggerDelay={0.07}>
           {labels.map((label) => (
-            <ImagePlaceholder key={label} label={label} aspectRatio="aspect-square" />
+            <StaggerItem key={label}>
+              <ImagePlaceholder label={label} aspectRatio="aspect-square" />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
         <div className="text-center">
-          <Link href={`/${locale}/galerie`} className="btn-secondary">
+          <Link href={`/${locale}/galerie`} className="btn-secondary transition-all duration-200">
             Voir toute la galerie →
           </Link>
         </div>
@@ -346,21 +338,27 @@ function PrivateEventsSection({ locale }: { locale: string }) {
     <section className="py-20 bg-blush/20" aria-labelledby="private-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <FadeIn className="w-full">
             <ImagePlaceholder label="Événement privé au salon" aspectRatio="aspect-[4/3]" />
-          </div>
+          </FadeIn>
           <div>
-            <h2 id="private-heading" className="section-title">{t('private_title')}</h2>
-            <p className="section-subtitle mb-8">{t('private_subtitle')}</p>
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <FadeInSectionHeading id="private-heading" className="section-title">
+              {t('private_title')}
+            </FadeInSectionHeading>
+            <FadeIn delay={0.1}>
+              <p className="section-subtitle mb-8">{t('private_subtitle')}</p>
+            </FadeIn>
+            <StaggerContainer className="grid grid-cols-2 gap-4 mb-8" staggerDelay={0.08}>
               {eventTypes.map(({ icon, label }) => (
-                <div key={label} className="flex items-center gap-3 p-3 rounded-xl bg-white/70">
-                  <div className="text-terracotta">{icon}</div>
-                  <span className="text-sm font-medium text-charcoal">{label}</span>
-                </div>
+                <StaggerItem key={label}>
+                  <div className="flex items-center gap-3 p-3 rounded-xl bg-white/70 ring-1 ring-black/5">
+                    <div className="text-terracotta">{icon}</div>
+                    <span className="text-sm font-medium text-charcoal">{label}</span>
+                  </div>
+                </StaggerItem>
               ))}
-            </div>
-            <Link href={`/${locale}/location-privee`} className="btn-primary inline-flex items-center gap-2">
+            </StaggerContainer>
+            <Link href={`/${locale}/location-privee`} className="btn-primary inline-flex items-center gap-2 transition-all duration-200">
               {tPe('form_title')} <ChevronRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </div>
@@ -375,58 +373,64 @@ function NewsletterSection() {
   return (
     <section className="py-20 bg-sage/20" aria-labelledby="newsletter-heading">
       <div className="max-w-2xl mx-auto px-4 text-center">
-        <h2 id="newsletter-heading" className="section-title">{t('title')}</h2>
-        <p className="section-subtitle mx-auto mb-8">{t('subtitle')}</p>
-        <form
-          action="/api/newsletter"
-          method="POST"
-          className="flex flex-col gap-4 max-w-md mx-auto"
-          aria-label="Formulaire d'inscription à l'infolettre"
-        >
-          <div>
-            <label htmlFor="newsletter-firstname" className="sr-only">
-              {t('first_name_placeholder')}
-            </label>
-            <input
-              id="newsletter-firstname"
-              name="firstName"
-              type="text"
-              autoComplete="given-name"
-              placeholder={t('first_name_placeholder')}
-              className="w-full px-4 py-3 rounded-full border border-sage/40 bg-white focus:outline-none focus:ring-2 focus:ring-forest text-charcoal placeholder-brown/40"
-            />
-          </div>
-          <div>
-            <label htmlFor="newsletter-email" className="sr-only">
-              {t('email_placeholder')}
-            </label>
-            <input
-              id="newsletter-email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              placeholder={t('email_placeholder')}
-              className="w-full px-4 py-3 rounded-full border border-sage/40 bg-white focus:outline-none focus:ring-2 focus:ring-forest text-charcoal placeholder-brown/40"
-            />
-          </div>
-          <div className="flex items-start gap-3 text-left">
-            <input
-              id="newsletter-consent"
-              name="consent"
-              type="checkbox"
-              required
-              className="mt-1 w-4 h-4 rounded border-sage/40 text-forest focus:ring-forest"
-            />
-            <label htmlFor="newsletter-consent" className="text-sm text-brown/80">
-              {t('consent')}
-            </label>
-          </div>
-          <button type="submit" className="btn-primary">
-            {t('submit')}
-          </button>
-          <p className="text-xs text-brown/50">{t('privacy_note')}</p>
-        </form>
+        <FadeInSectionHeading id="newsletter-heading" className="section-title">
+          {t('title')}
+        </FadeInSectionHeading>
+        <FadeIn delay={0.1}>
+          <p className="section-subtitle mx-auto mb-8">{t('subtitle')}</p>
+        </FadeIn>
+        <FadeIn delay={0.2}>
+          <form
+            action="/api/newsletter"
+            method="POST"
+            className="flex flex-col gap-4 max-w-md mx-auto"
+            aria-label="Formulaire d'inscription à l'infolettre"
+          >
+            <div>
+              <label htmlFor="newsletter-firstname" className="sr-only">
+                {t('first_name_placeholder')}
+              </label>
+              <input
+                id="newsletter-firstname"
+                name="firstName"
+                type="text"
+                autoComplete="given-name"
+                placeholder={t('first_name_placeholder')}
+                className="w-full px-4 py-3 rounded-full border border-sage/40 bg-white focus:outline-none focus:ring-2 focus:ring-forest text-charcoal placeholder-brown/40"
+              />
+            </div>
+            <div>
+              <label htmlFor="newsletter-email" className="sr-only">
+                {t('email_placeholder')}
+              </label>
+              <input
+                id="newsletter-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                placeholder={t('email_placeholder')}
+                className="w-full px-4 py-3 rounded-full border border-sage/40 bg-white focus:outline-none focus:ring-2 focus:ring-forest text-charcoal placeholder-brown/40"
+              />
+            </div>
+            <div className="flex items-start gap-3 text-left">
+              <input
+                id="newsletter-consent"
+                name="consent"
+                type="checkbox"
+                required
+                className="mt-1 w-4 h-4 rounded border-sage/40 text-forest focus:ring-forest"
+              />
+              <label htmlFor="newsletter-consent" className="text-sm text-brown/80">
+                {t('consent')}
+              </label>
+            </div>
+            <button type="submit" className="btn-primary transition-all duration-200">
+              {t('submit')}
+            </button>
+            <p className="text-xs text-brown/50">{t('privacy_note')}</p>
+          </form>
+        </FadeIn>
       </div>
     </section>
   )
@@ -439,7 +443,7 @@ function ContactSection({ locale }: { locale: string }) {
     <section className="py-20 bg-white" aria-labelledby="contact-section-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <FadeIn className="w-full">
             <h2 id="contact-section-heading" className="section-title">
               {tSections('contact_title')}
             </h2>
@@ -460,11 +464,11 @@ function ContactSection({ locale }: { locale: string }) {
                 <span className="text-charcoal">[TÉLÉPHONE À DÉFINIR]</span>
               </div>
             </div>
-            <Link href={`/${locale}/contact`} className="btn-primary">
+            <Link href={`/${locale}/contact`} className="btn-primary transition-all duration-200">
               {t('submit')}
             </Link>
-          </div>
-          <div>
+          </FadeIn>
+          <FadeIn delay={0.15} className="w-full">
             <div
               className="rounded-2xl overflow-hidden bg-sage/20 aspect-video flex items-center justify-center border-2 border-dashed border-sage/50"
               aria-label={t('map_title')}
@@ -474,7 +478,7 @@ function ContactSection({ locale }: { locale: string }) {
                 <span className="text-xs text-brown/40">1951 Rue Saint-Zotique Est, Montréal</span>
               </p>
             </div>
-          </div>
+          </FadeIn>
         </div>
       </div>
     </section>

@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { Menu, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
   { key: 'menu', href: '/menu' },
@@ -102,46 +103,55 @@ export function Header() {
       </div>
 
       {/* Mobile menu */}
-      {mobileOpen && (
-        <div id="mobile-menu" className="lg:hidden bg-cream border-t border-sage/20">
-          <nav
-            aria-label="Navigation mobile"
-            className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1"
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            id="mobile-menu"
+            className="lg:hidden bg-cream border-t border-sage/20 overflow-hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
-            {navLinks.map(({ key, href }) => (
-              <Link
-                key={key}
-                href={localizedHref(href)}
-                className={cn(
-                  'px-4 py-3 rounded-lg text-sm font-medium transition-colors',
-                  isActive(href)
-                    ? 'bg-forest/10 text-forest'
-                    : 'text-charcoal/70 hover:text-forest hover:bg-forest/5'
-                )}
-                onClick={() => setMobileOpen(false)}
-              >
-                {t(key)}
-              </Link>
-            ))}
-            <div className="flex items-center gap-3 pt-3 border-t border-sage/20 mt-2">
-              <Link
-                href={otherLocalePath}
-                className="text-sm text-brown/70 hover:text-forest transition-colors font-medium uppercase tracking-wide"
-                onClick={() => setMobileOpen(false)}
-              >
-                {otherLocale.toUpperCase()}
-              </Link>
-              <Link
-                href={localizedHref('/experiences')}
-                className="btn-primary text-sm py-2 px-5"
-                onClick={() => setMobileOpen(false)}
-              >
-                {t('book')}
-              </Link>
-            </div>
-          </nav>
-        </div>
-      )}
+            <nav
+              aria-label="Navigation mobile"
+              className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1"
+            >
+              {navLinks.map(({ key, href }) => (
+                <Link
+                  key={key}
+                  href={localizedHref(href)}
+                  className={cn(
+                    'px-4 py-3 rounded-lg text-sm font-medium transition-colors',
+                    isActive(href)
+                      ? 'bg-forest/10 text-forest'
+                      : 'text-charcoal/70 hover:text-forest hover:bg-forest/5'
+                  )}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {t(key)}
+                </Link>
+              ))}
+              <div className="flex items-center gap-3 pt-3 border-t border-sage/20 mt-2">
+                <Link
+                  href={otherLocalePath}
+                  className="text-sm text-brown/70 hover:text-forest transition-colors font-medium uppercase tracking-wide"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {otherLocale.toUpperCase()}
+                </Link>
+                <Link
+                  href={localizedHref('/experiences')}
+                  className="btn-primary text-sm py-2 px-5"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {t('book')}
+                </Link>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

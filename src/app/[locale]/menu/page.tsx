@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { StaggerContainer, StaggerItem, FadeIn } from '@/components/home/AnimatedSections'
 
 export async function generateMetadata({
   params,
@@ -130,13 +131,15 @@ export default async function MenuPage({
       <main id="main-content">
         <section className="bg-cream py-16" aria-labelledby="menu-page-heading">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 id="menu-page-heading" className="font-serif text-4xl md:text-5xl text-forest mb-4">
-              Notre menu
-            </h1>
-            <p className="text-brown/80 text-lg max-w-2xl mx-auto">
-              Un menu végétalien, local et fait avec soin. Aucune commande en ligne —
-              menu consultable en salle et ici.
-            </p>
+            <FadeIn>
+              <h1 id="menu-page-heading" className="font-serif text-4xl md:text-5xl text-forest mb-4">
+                Notre menu
+              </h1>
+              <p className="text-brown/80 text-lg max-w-2xl mx-auto">
+                Un menu végétalien, local et fait avec soin. Aucune commande en ligne —
+                menu consultable en salle et ici.
+              </p>
+            </FadeIn>
           </div>
         </section>
 
@@ -145,15 +148,17 @@ export default async function MenuPage({
             <div className="space-y-16">
               {menuCategories.map((category) => (
                 <div key={category.id} id={`category-${category.id}`}>
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-3xl" aria-hidden="true">{category.emoji}</span>
-                    <h2 className="font-serif text-2xl text-forest">{category.title}</h2>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <FadeIn>
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="text-3xl" aria-hidden="true">{category.emoji}</span>
+                      <h2 className="font-serif text-2xl text-forest">{category.title}</h2>
+                    </div>
+                  </FadeIn>
+                  <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.06}>
                     {category.items.map((item) => (
+                      <StaggerItem key={item.name}>
                       <article
-                        key={item.name}
-                        className="p-5 rounded-2xl bg-cream/60 border border-sage/20 hover:border-sage/40 transition-colors"
+                        className="p-5 rounded-2xl bg-cream/60 border border-sage/20 hover:border-sage/40 transition-colors ring-1 ring-black/5"
                       >
                         <div className="flex justify-between items-start mb-2">
                           <h3 className="font-medium text-charcoal">{item.name}</h3>
@@ -173,8 +178,9 @@ export default async function MenuPage({
                           ))}
                         </div>
                       </article>
+                      </StaggerItem>
                     ))}
-                  </div>
+                  </StaggerContainer>
                 </div>
               ))}
             </div>

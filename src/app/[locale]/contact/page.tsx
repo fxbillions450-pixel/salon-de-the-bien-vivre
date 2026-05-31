@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { MapPin, Clock, Phone, Mail } from 'lucide-react'
+import { FadeIn } from '@/components/home/AnimatedSections'
 
 export default function ContactPage() {
   const params = useParams()
@@ -91,7 +92,7 @@ export default function ContactPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Left: Info */}
-              <div>
+              <FadeIn className="w-full">
                 <h2 className="font-serif text-2xl text-forest mb-6">
                   {isFr ? 'Informations pratiques' : 'Practical information'}
                 </h2>
@@ -159,10 +160,10 @@ export default function ContactPage() {
                       : '[Public transit and parking information to be added]'}
                   </p>
                 </div>
-              </div>
+              </FadeIn>
 
               {/* Right: Form */}
-              <div>
+              <FadeIn delay={0.15} className="w-full">
                 <h2 className="font-serif text-2xl text-forest mb-6">
                   {isFr ? 'Envoyer un message' : 'Send a message'}
                 </h2>
@@ -299,7 +300,7 @@ export default function ContactPage() {
                     </button>
                   </form>
                 )}
-              </div>
+              </FadeIn>
             </div>
           </div>
         </section>
